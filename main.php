@@ -1,3 +1,7 @@
+<?php
+require_once("./teacher.class.php")
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -12,10 +16,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
 
-    <!-- Bootstrap core CSS -->
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="./assets/css/blog.css" rel="stylesheet">
 </head>
@@ -23,7 +24,7 @@
 <body>
 
     <div class="container">
-        <?php include_once("./pages/header/header.html") ?>
+        <?php include_once("./header.php") ?>
 
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
             <div class="col-md-6 px-0">
@@ -47,8 +48,7 @@
                             lead-in to additional content.</p>
                         <a href="#">Continue reading</a>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                        alt="Card image cap">
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
                 </div>
             </div>
             <div class="col-md-6">
@@ -63,8 +63,7 @@
                             lead-in to additional content.</p>
                         <a href="#">Continue reading</a>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                        alt="Card image cap">
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
                 </div>
             </div>
         </div>
@@ -205,12 +204,12 @@
 
     </main>
 
-    <?php include_once("./pages/footer/footer.html") ?>
+    <?php include_once("./pages/footer/footer.php") ?>
 
-    <script src="./assets/js/jquery-slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="./assets/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="./assets/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="./assets/js/jquery-slim.min.js"><\/script>')
+    </script>
     <script src="./assets/js/popper.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="./assets/js/holder.min.js"></script>

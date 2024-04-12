@@ -1,7 +1,3 @@
-<?php
-require_once("./teacher.class.php")
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -204,7 +200,7 @@ require_once("./teacher.class.php")
 
     </main>
 
-    <?php include_once("./pages/footer/footer.php") ?>
+    <?php include_once("./footer.php") ?>
 
     <script src="./assets/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>

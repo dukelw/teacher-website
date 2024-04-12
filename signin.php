@@ -1,5 +1,5 @@
 <?php
-require_once("./teacher.class.php");
+require_once("./entities/teacher.class.php");
 if (isset($_POST["email"]) && isset($_POST["password"])) {
     $success = Teacher::checkLogin($_POST["email"], $_POST["password"]);
     if ($success) {
@@ -22,7 +22,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./signin.css" rel="stylesheet">
+    <link href="./css/signin.css" rel="stylesheet">
     <form class="form-signin" action="#" method="POST">
         <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>

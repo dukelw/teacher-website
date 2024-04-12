@@ -13,7 +13,7 @@
           <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
         </svg>
       </a>
-      <a class="btn btn-sm btn-outline-secondary" href="/teacher_website/pages/signin/signin.php">Sign up</a>
+      <a class="btn btn-sm btn-outline-secondary" href="./signin.php">Sign up</a>
     </div>
   </div>
 </header>

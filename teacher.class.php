@@ -1,5 +1,5 @@
 <?php
-require_once("");
+require_once("./config/db.class.php");
 ?>
 <?php
 class Teacher
@@ -61,10 +61,17 @@ class Teacher
 
   public static function checkLogin($mail, $password)
   {
-    $password = md5($password);
-    $db = new Db();
-    $sql = "SELECT * FROM teacher WHERE mail = '$mail' AND password = '$password'";
-    $result = $db->query_execute($sql);
-    return $result;
+      $db = new Db();
+      $sql = "SELECT * FROM teacher WHERE mail = '$mail' AND password = '$password'";
+      $result = $db->query_execute($sql);
+      
+      // Kiểm tra xem có bản ghi nào được trả về hay không
+      if ($result->num_rows > 0) {
+          // Trả về true nếu có bản ghi tồn tại
+          return true;
+      } else {
+          // Trả về false nếu không có bản ghi nào tồn tại
+          return false;
+      }
   }
 }

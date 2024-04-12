@@ -1,5 +1,5 @@
 <?php
-require_once("./entities/teacher.class.php")
+require_once("./teacher.class.php")
 ?>
 
 <!doctype html>
@@ -24,7 +24,7 @@ require_once("./entities/teacher.class.php")
 <body>
 
     <div class="container">
-        <?php include_once("./pages/header/header.php") ?>
+        <?php include_once("./header.php") ?>
 
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
             <div class="col-md-6 px-0">

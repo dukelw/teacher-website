@@ -1,11 +1,25 @@
 <?php
 require_once("./entities/teacher.class.php");
+if (isset($_SESSION['username']) != "") {
+    header('Location: main.php');
+}
 if (isset($_POST["email"]) && isset($_POST["password"])) {
+    echo "Email: " . $_POST["email"];
+    echo "Password: " . $_POST["password"];
     $success = Teacher::checkLogin($_POST["email"], $_POST["password"]);
-    if ($success) {
-        header("Location: add_article.php");
+    if (!$success) {
+?>
+        <script>
+            alert("Có lỗi xảy ra, vui lòng kiểm tra lại dữ liệu!")
+        </script>
+<?php
     } else {
-        echo "Đăng nhập thất bại";
+        session_start();
+        $email = $_POST["email"];
+        $username = Teacher::get_teacher($email);
+        $_SESSION['username'] = $username[0]["NAME"];
+        $_SESSION['useremail'] = $email;
+        header('Location: main.php');
     }
 }
 ?>

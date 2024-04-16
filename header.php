@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./css/header.css">
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1">
@@ -13,7 +14,15 @@
           <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
         </svg>
       </a>
-      <a class="btn btn-sm btn-outline-secondary" href="./signin.php">Sign up</a>
+      <?php
+      session_start();
+      if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
+        echo "<span class=\"username\">" . $_SESSION["username"] . "</span>";
+        echo "<a class='btn btn-sm btn-outline-secondary' href='./logout.php'>Log out</a>";
+      } else {
+        echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign up</a>";
+      }
+      ?>
     </div>
   </div>
 </header>

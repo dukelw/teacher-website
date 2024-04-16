@@ -7,13 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-
-    <title>Blog Template for Bootstrap</title>
-
+    <title>Teacher Website</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
-
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
     <link href="./assets/css/blog.css" rel="stylesheet">
 </head>
 

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./assets/js/bootstrap.min.js">
 <footer class="blog-footer">
     <p>Trang web hỗ trợ <a href="#">thầy Dzoãn Thanh</a> tạo bởi nhóm 52200038, 52200195, 52200126
     </p>

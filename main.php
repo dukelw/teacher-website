@@ -12,7 +12,7 @@
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
-    <link rel="apple-touch-icon" type="image/png" href="./assets/images/logo.svg" />
+    <link href="./assets/css/blog.css" rel="stylesheet">
 </head>
 
 <body>

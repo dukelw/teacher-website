@@ -3,7 +3,7 @@ require_once("./entities/teacher.class.php");
 if (isset($_POST["email"]) && isset($_POST["password"])) {
     $success = Teacher::checkLogin($_POST["email"], $_POST["password"]);
     if ($success) {
-        echo "Đăng nhập thành công";
+        header("Location: add_article.php");
     } else {
         echo "Đăng nhập thất bại";
     }
@@ -35,7 +35,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-4">Chưa có tài khoản liên hệ <a href="#">thầy Dzoãn Thanh đẹp trai</a> để lấy tài khoản</p>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
     </form>
     </body>
 

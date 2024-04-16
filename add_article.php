@@ -29,7 +29,7 @@ if (isset($_POST["btnsubmit"])) {
 <head>
   <meta charset="utf-8">
   <title>Thêm bài báo</title>
-  <link rel="stylesheet" href="./css/addNewArticle.css" />
+  <link rel="stylesheet" href="./css/add_article.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
@@ -263,6 +263,7 @@ if (isset($_POST["btnsubmit"])) {
         </div>
       </form>
     </div>
+    <?= "<h1 class='spacer'>Bài viết hiện tại</h1>" ?>
     <div id="main"></div>
   </div>
 </body>

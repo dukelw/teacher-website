@@ -19,7 +19,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         $username = Teacher::get_teacher($email);
         $_SESSION['username'] = $username[0]["NAME"];
         $_SESSION['useremail'] = $email;
-        header('Location: main.php');
+        header('Location: dashboard.php');
     }
 }
 ?>

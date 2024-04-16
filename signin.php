@@ -3,7 +3,7 @@ require_once("./entities/teacher.class.php");
 if (isset($_POST["email"]) && isset($_POST["password"])) {
     $success = Teacher::checkLogin($_POST["email"], $_POST["password"]);
     if ($success) {
-        echo "Đăng nhập thành công";
+        header("Location: add_article.php");
     } else {
         echo "Đăng nhập thất bại";
     }
@@ -16,13 +16,11 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-
-    <title>Signin Template for Bootstrap</title>
-
+    <title>Teacher Website</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/signin.css" rel="stylesheet">
+    <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
     <form class="form-signin" action="#" method="POST">
         <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -37,7 +35,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-4">Chưa có tài khoản liên hệ <a href="#">thầy Dzoãn Thanh đẹp trai</a> để lấy tài khoản</p>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
     </form>
     </body>
 

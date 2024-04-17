@@ -1,0 +1,62 @@
+.green-color {
+  color: #28A745 !important;
+}
+
+
+.feature-description,
+.feature-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.custom-image {
+  max-width: 240px;
+  object-fit: cover;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-top span {
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+    font-weight: 600;
+}
+
+.card-top span:first-child {
+  color: #007BFF;
+}
+
+.card-top span:last-child {
+  color: #28A745;
+}
+
+.notification-title {
+  text-decoration: none;
+  color: #212529;
+  font-weight: 500;
+}
+
+.notification-title:hover {
+  color: #ff0000;
+  text-decoration: none;
+}
+
+.publish-day {
+  font-size: 12px;
+  font-style: italic;
+  color: #877373;
+}

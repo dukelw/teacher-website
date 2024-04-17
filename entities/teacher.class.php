@@ -42,12 +42,19 @@ class Teacher
 
   public function save()
   {
+    $file_temp = $this->avatar['tmp_name'];
+    $user_file = $this->avatar['name'];
+    $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
+    $filepath = "./upload/" . $timestamp . $user_file;
+    if (move_uploaded_file($file_temp, $filepath) == false) {
+      return false;
+    }
     $db = new Db();
     $sql = "INSERT INTO teacher (name, mail, password, avatar, gender, phone, birthday, joinyear, fired, position) VALUES (
       '" . mysqli_real_escape_string($db->connect(), $this->name) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->mail) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->password) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->avatar) . "',
+      '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
       " . ($this->gender ? 1 : 0) . ",
       '" . mysqli_real_escape_string($db->connect(), $this->phone) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->birthday) . "',

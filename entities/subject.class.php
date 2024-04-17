@@ -19,4 +19,12 @@ class Subject
     $result = $db->select_to_array($sql);
     return $result;
   }
+
+  public static function get_subject($id)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM subject WHERE ID = '$id'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
 }

@@ -1,3 +1,8 @@
+<?php
+include_once("./entities/article.class.php");
+include_once("./entities/subject.class.php");
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -13,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
     <link href="./assets/css/blog.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
 </head>
 
 <body>
@@ -29,41 +36,95 @@
             </div>
         </div>
 
-        <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-primary">World</strong>
-                        <h3 class="mb-0">
-                            <a class="text-dark" href="#">Featured post</a>
+        <?php
+        $articles = Article::list_articles();
+        $featureone = $articles[count($articles) - 1];
+        $featuretwo = $articles[count($articles) - 2];
+        echo "<div class='row mb-2'>
+            <div class='col-md-6'>
+                <div class='card flex-md-row mb-4 box-shadow h-md-250'>
+                    <div class='card-body d-flex flex-column align-items-start'>
+                        <strong class='d-inline-block mb-2 text-primary'>" . Subject::get_subject($featureone["TYPE"])[0]["NAME"] . "</strong>
+                        <h3 class='mb-0'>
+                            <a class='text-dark feature-title' href='#'>" . $featureone["TITLE"] . ".</a>
                         </h3>
-                        <div class="mb-1 text-muted">Nov 12</div>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to additional content.</p>
-                        <a href="#">Continue reading</a>
+                        <div class='mb-1 text-muted'>" . $featureone["PUBLISH"] . "</div>
+                        <p class='card-text mb-auto feature-description'>" . $featureone["DESCRIPTION"] . "</p>
+                        <a href='#'>Tiếp tục đọc</a>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                    <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featureone["THUMBNAIL"] . "' alt='Card image cap'>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-success">Design</strong>
-                        <h3 class="mb-0">
-                            <a class="text-dark" href="#">Post title</a>
+            <div class='col-md-6'>
+                <div class='card flex-md-row mb-4 box-shadow h-md-250'>
+                    <div class='card-body d-flex flex-column align-items-start'>
+                        <strong class='d-inline-block mb-2 text-primary green-color'>" . Subject::get_subject($featuretwo["TYPE"])[0]["NAME"] . "</strong>
+                        <h3 class='mb-0'>
+                            <a class='text-dark feature-title' href='#'>" . $featuretwo["TITLE"] . ".</a>
                         </h3>
-                        <div class="mb-1 text-muted">Nov 11</div>
-                        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural
-                            lead-in to additional content.</p>
-                        <a href="#">Continue reading</a>
+                        <div class='mb-1 text-muted'>" . $featuretwo["PUBLISH"] . "</div>
+                        <p class='card-text mb-auto feature-description'>" . $featuretwo["DESCRIPTION"] . "</p>
+                        <a href='#'>Tiếp tục đọc</a>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                    <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featuretwo["THUMBNAIL"] . "' alt='Card image cap'>
                 </div>
             </div>
-        </div>
+        </div>"
+        ?>
     </div>
 
     <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-9 blog-main">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">
+                    Tin tức
+                </h3>
+                <div class="row">
+                    <?php
+                    $articles = Article::list_articles();
+                    foreach ($articles as $article) {
+                        echo "
+                        <div class='col-md-4'>
+                            <div class='card' style='width: 100%;'>
+                                <img src=" . $article["THUMBNAIL"] . " class='card-img-top' alt='Article Thumbnail'>
+                                <div class='card-body'>
+                                    <div class='card-top'>
+                                        <span>" . $article["PUBLISH"] . "</span>
+                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"]  . "</span>
+                                    </div>
+                                    <h4 class='card-title'> " . $article["TITLE"] . "</h4>
+                                    <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <aside class="col-md-3 blog-sidebar">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">
+                    Thông báo
+                </h3>
+
+                <?php
+                $notifications = Article::list_notifications();
+                foreach ($notifications as $notification) {
+                    echo "
+                        <p>
+                            <span class='ti-announcement'></span>
+                            <a href='' class='notification-title'> " . $notification["TITLE"] . "</a>
+                            <span class='publish-day'>" . $notification["PUBLISH"] . "</span>
+                        </p>
+                    ";
+                }
+                ?>
+            </aside>
+
+        </div>
+
+        <!-- Default row -->
         <div class="row">
             <div class="col-md-8 blog-main">
                 <h3 class="pb-3 mb-4 font-italic border-bottom">

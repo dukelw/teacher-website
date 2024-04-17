@@ -7,15 +7,17 @@ if (isset($_POST["btnsubmit"])) {
   $content = $_POST["txtContent"];
   $description = $_POST["txtDescription"];
   $picture = $_FILES["txtThumbnail"];
+  $noti = $_POST["txtType"];
 
   // Set CONSTANT values for test
   $publish = date("Y-m-d");
   $author = "Lê Phan Thế Vĩ";
   $aid = intval("1");
-  $newArticle = new Article($title, $type, $content, $publish, $author, $aid, $picture, $description);
+  $newArticle = new Article($title, $type, $content, $publish, $author, $aid, $picture, $description, $noti);
   $result = $newArticle->save();
   if ($result) {
-    echo $content;
+    echo "Thêm thành công";
+    // header("Location: main.php");
   } else {
     echo "Thêm thất bại";
     // header("Location: add_product.php?failure");
@@ -236,6 +238,17 @@ if (isset($_POST["btnsubmit"])) {
               echo "<option value=" . $subject['ID'] . ">" . $subject["NAME"] . "</option>";
             }
             ?>
+          </select>
+          <div class="invalid-feedback">
+            Please select a valid state.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="type" class="form-label">Thể loại</label>
+          <select class="form-select" name="txtType" id="type" required>
+            <option selected disabled value="">--Chọn loại bài viết--</option>
+            <option value="article">Bài báo</option>
+            <option value="notification">Thông báo</option>
           </select>
           <div class="invalid-feedback">
             Please select a valid state.

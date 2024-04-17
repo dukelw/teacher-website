@@ -12,6 +12,7 @@ class Article
   public $aid;
   public $thumbnail;
   public $description;
+  public $noti;
 
   public function __construct(
     $title,
@@ -21,7 +22,8 @@ class Article
     $author,
     $aid,
     $thumbnail,
-    $description
+    $description,
+    $noti
   ) {
     $this->title = $title;
     $this->type = $type;
@@ -31,6 +33,7 @@ class Article
     $this->aid = $aid;
     $this->thumbnail = $thumbnail;
     $this->description = $description;
+    $this->noti = $noti;
   }
 
   public function save()
@@ -43,7 +46,7 @@ class Article
       return false;
     }
     $db = new Db();
-    $sql = "INSERT INTO article (title, type, content, publish, author, aid, thumbnail, description) VALUES (
+    $sql = "INSERT INTO article (title, type, content, publish, author, aid, thumbnail, description, isNoti) VALUES (
       '" . mysqli_real_escape_string($db->connect(), $this->title) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->type) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->content) . "',
@@ -51,9 +54,50 @@ class Article
       '" . mysqli_real_escape_string($db->connect(), $this->author) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->aid) . "',
       '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->description) . "'
+      '" . mysqli_real_escape_string($db->connect(), $this->description) . "',
+      '" . mysqli_real_escape_string($db->connect(), $this->noti) . "'
     )";
     $result = $db->query_execute($sql);
+    return $result;
+  }
+
+  public static function list_articles()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_notifications()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti = 'notification'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_by_type($type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE type='$type'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_relate($type, $id)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE type='$type' AND ID != '$id'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function get_article($id)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE ID = '$id'";
+    $result = $db->select_to_array($sql);
     return $result;
   }
 }

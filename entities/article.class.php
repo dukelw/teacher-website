@@ -64,7 +64,40 @@ class Article
   public static function list_articles()
   {
     $db = new Db();
-    $sql = "SELECT * FROM article WHERE isNoti != 'notification'";
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT 6";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_paganation($page)
+  {
+    $number = $page * 6;
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT $number";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_activities()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' AND TYPE = 1";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_researchs()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' AND TYPE = 2";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_news()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' AND TYPE = 3 LIMIT 3";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -85,10 +118,10 @@ class Article
     return $result;
   }
 
-  public static function list_articles_relate($type, $id)
+  public static function list_articles_relate($type, $id, $isNoti)
   {
     $db = new Db();
-    $sql = "SELECT * FROM article WHERE type='$type' AND ID != '$id'";
+    $sql = "SELECT * FROM article WHERE type='$type' AND ID != '$id' AND isNoti = '$isNoti'";
     $result = $db->select_to_array($sql);
     return $result;
   }

@@ -33,15 +33,7 @@
     "Apple Color Emoji",
     "Segoe UI Emoji",
     "Segoe UI Symbol";
-    font-weight: 600;
-}
-
-.card-top span:first-child {
-  color: #007BFF;
-}
-
-.card-top span:last-child {
-  color: #28A745;
+  font-weight: 600;
 }
 
 .notification-title {
@@ -61,33 +53,16 @@
   color: #877373;
 }
 
-.custom-card-image {
-  min-height: 150px;
-  object-fit: cover;
-}
-
-.spacer {
-  margin: 12px 0 30px 0;
-}
-
 .more {
   display: block;
   margin-top: 8px;
   float: right;
 }
 
-.news-card {
-  margin-top: 25px;
-}
-
-.card-detail:hover {
-  text-decoration: none;
-}
-
-.card-title {
-  color: #343A40;
-}
-
-.card-text {
-  color: #212529;
+.news-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 8px;
 }

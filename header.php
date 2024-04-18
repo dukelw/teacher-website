@@ -5,7 +5,7 @@
       <a class="text-muted" href="#">Về trang chủ</a>
     </div>
     <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" href="#">Khoa công nghệ thông tin</a>
+      <a class="blog-header-logo text-dark" href="main.php">Khoa công nghệ thông tin</a>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
       <a class="text-muted" href="#">

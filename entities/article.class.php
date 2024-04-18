@@ -64,16 +64,23 @@ class Article
   public static function list_articles()
   {
     $db = new Db();
-    $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT 6";
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification'";
     $result = $db->select_to_array($sql);
     return $result;
   }
 
-  public static function list_articles_paganation($page)
+  public static function list_articles_pagination($start, $limit)
   {
-    $number = $page * 6;
     $db = new Db();
-    $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT $number";
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT $start, $limit";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_articles_pagination_type($start, $limit, $type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti != 'notification' AND TYPE = $type LIMIT $start, $limit";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -113,7 +120,7 @@ class Article
   public static function list_articles_by_type($type)
   {
     $db = new Db();
-    $sql = "SELECT * FROM article WHERE type='$type'";
+    $sql = "SELECT * FROM article WHERE type='$type' AND isNoti != 'notification'";
     $result = $db->select_to_array($sql);
     return $result;
   }

@@ -97,7 +97,7 @@ include_once("./entities/subject.class.php");
                     }
                     ?>
                 </div>
-                <a class="more" href="#">Xem thêm</a>
+                <a class="more" href="news.php">Xem thêm</a>
             </div>
 
             <aside class="col-md-3 blog-sidebar">
@@ -129,7 +129,7 @@ include_once("./entities/subject.class.php");
                 </h3>
                 <div class="row">
                     <?php
-                    $articles = Article::list_articles();
+                    $articles = Article::list_articles_pagination(1, 6);
                     foreach ($articles as $article) {
                         echo "
                         <div class='col-md-4 news-card'>
@@ -151,7 +151,7 @@ include_once("./entities/subject.class.php");
                     }
                     ?>
                 </div>
-                <a class="more" href="#">Xem thêm</a>
+                <a class="more" href="news.php">Xem thêm</a>
             </div>
         </div>
         <div class="spacer">

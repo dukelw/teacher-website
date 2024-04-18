@@ -1,0 +1,18 @@
+.sort-type {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  margin-bottom: 8px;
+}
+
+.sort-type:hover {
+  color: #ff0000;
+}
+
+.link {
+  color: #212529;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #ff0000;
+}

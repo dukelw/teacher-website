@@ -42,7 +42,7 @@ if (isset($_GET["id"]) == null) {
         <?= $article[0]["CONTENT"] ?>
         <p style="margin-top: 16px;">
           Tag:
-          <a href="" style="padding: 6px 12px; background-color: red; color: white; border-radius: 12px;"><?= Subject::get_subject($article[0]["TYPE"])[0]["NAME"] ?></a>
+          <a href="news.php?page=1&subject=<?= $article[0]['TYPE'] ?>" style="padding: 6px 12px; background-color: red; color: white; border-radius: 12px;"><?= Subject::get_subject($article[0]["TYPE"])[0]["NAME"] ?></a>
         </p>
       </div>
 

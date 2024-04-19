@@ -1,6 +1,6 @@
 <?php
-include_once("./entities/article.class.php");
-include_once("./entities/subject.class.php");
+include_once ("./entities/article.class.php");
+include_once ("./entities/subject.class.php");
 ?>
 
 <!doctype html>
@@ -20,16 +20,18 @@ include_once("./entities/subject.class.php");
     <link href="./assets/css/blog.css" rel="stylesheet">
     <link href="./css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <script src="./assets/js/jquery-slim.min.js"></script>
     <script src="./assets/js/holder.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
 </head>
 
 <body>
+    <?php include_once ("./header-topbar.php") ?>
     <div class="container">
-        <?php include_once("./header.php");
-        include_once("./slider.php")
-        ?>
+        <?php include_once ("./header.php");
+        include_once ("./slider.php")
+            ?>
         <?php
         $articles = Article::list_articles();
         $featureone = $articles[count($articles) - 1];
@@ -64,7 +66,7 @@ include_once("./entities/subject.class.php");
                 </div>
             </div>
         </div>"
-        ?>
+            ?>
     </div>
 
     <main role="main" class="container">
@@ -85,7 +87,7 @@ include_once("./entities/subject.class.php");
                                 <div class='card-body'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"]  . "</span>
+                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
                                     <h4 class='card-title'> " . $article["TITLE"] . "</h4>
                                     <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
@@ -139,7 +141,7 @@ include_once("./entities/subject.class.php");
                                 <div class='card-body'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"]  . "</span>
+                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
                                     <h4 class='card-title'> " . $article["TITLE"] . "</h4>
                                     <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
@@ -158,9 +160,11 @@ include_once("./entities/subject.class.php");
         </div>
     </main>
 
-    <?php include_once("./footer.php") ?>
+    <?php include_once ("./footer.php") ?>
 
-    <script src="./assets/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="./assets/js/jquery-slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script>
         window.jQuery || document.write('<script src="./assets/js/jquery-slim.min.js"><\/script>')
     </script>

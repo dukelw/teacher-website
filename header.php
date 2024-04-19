@@ -15,10 +15,20 @@
         </svg>
       </a>
       <?php
+      include_once("./entities/teacher.class.php");
       session_start();
       if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
-        echo "<span class=\"username\">" . $_SESSION["username"] . "</span>";
-        echo "<a class='btn btn-sm btn-outline-secondary' href='./logout.php'>Log out</a>";
+        echo "
+          <div class='user-info'>
+            <img class='user-avatar' alt='Avatar' src='" . Teacher::get_teacher($_SESSION["useremail"])[0]["AVATAR"] . "'>
+            <span class=\"username\">" . $_SESSION["username"] . "</span>
+            <ul class='user-options'>
+              <li class='user-item'><a class='navigate-link' href='logout.php'>Đăng xuất</a></li>
+              <li class='user-item'><a class='navigate-link' href='update_info.php'>Cập nhật thông tin</a></li>
+              <li class='user-item'><a class='navigate-link' href='logout.php'>Đăng xuất</a></li>
+              <li class='user-item'><a class='navigate-link' href='logout.php'>Đăng xuất</a></li>
+            </ul>
+          </div>";
       } else {
         echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign up</a>";
       }
@@ -31,10 +41,22 @@
   <nav class="nav d-flex justify-content-between">
     <a class="p-2 text-muted" href="#">Giới thiệu</a>
     <a class="p-2 text-muted" href="#">Giáo dục</a>
-    <a class="p-2 text-muted" href="#">Nghiên cứu</a>
+    <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>
     <a class="p-2 text-muted" href="#">Doanh nghiệp</a>
     <a class="p-2 text-muted" href="#">Tuyển sinh</a>
     <a class="p-2 text-muted" href="#">Cấm thi</a>
   </nav>
 </div>
+
+<script>
+  const user = document.querySelector(".user-info")
+  user.onclick = () => {
+    const optionsForm = document.querySelector('.user-options')
+    if (optionsForm.classList.contains('active')) {
+      optionsForm.classList.remove('active')
+    } else {
+      optionsForm.classList.add('active')
+    }
+  }
+</script>

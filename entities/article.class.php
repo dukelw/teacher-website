@@ -77,6 +77,17 @@ class Article
     return $result;
   }
 
+  public static function list_articles_by_keyword($keywork, $start, $limit)
+  {
+    if ($keywork != '') {
+      $db = new Db();
+      $sql = "SELECT * FROM article WHERE title LIKE '%$keywork%' OR description LIKE '%$keywork%' LIMIT $start, $limit";
+      $result = $db->select_to_array($sql);
+      return $result;
+    }
+  }
+
+
   public static function list_articles_pagination_type($start, $limit, $type)
   {
     $db = new Db();

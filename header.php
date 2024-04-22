@@ -6,8 +6,6 @@ session_start();
 <link rel="stylesheet" href="./css/header.css">
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 pt-1">
-      <a class="text-muted" href="./main.php">Về trang chủ</a>
     <div class="col-4 pt-1 d-flex justify-content-center align-items-start flex-column search-container">
       <div class="col-12 pt-1 d-flex justify-content-start align-items-center">
         <span class="text-muted search-toggle">
@@ -76,7 +74,7 @@ session_start();
             </ul>
           </div>";
       } else {
-        echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign up</a>";
+        echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign in</a>";
       }
       ?>
     </div>
@@ -85,7 +83,7 @@ session_start();
 
 <div class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex justify-content-between">
-    <a class="p-2 text-muted" href="./introduction.php">Giới thiệu</a>
+    <a class="p-2 text-muted" href="#">Giới thiệu</a>
     <a class="p-2 text-muted" href="#">Giáo dục</a>
     <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>

@@ -1,0 +1,41 @@
+.equal-size {
+    width: 250px; /* Đặt kích thước mong muốn */
+    height: 200px; /* Đặt kích thước mong muốn */
+}
+.widget-item {
+    text-transform: uppercase;
+}
+.title {
+    text-transform: uppercase;
+
+}
+.widget-item {
+    position: relative;
+    text-transform: uppercase;
+}
+
+.widget-item:hover img {
+    filter: brightness(70%);
+}
+
+.widget-item:hover .label {
+    display: block;
+    text-decoration: underline;
+}
+
+.label {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    display: none;
+}
+
+.widget-item a.widget-link {
+    color: black;
+}
+
+

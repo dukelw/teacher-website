@@ -86,4 +86,13 @@ class Teacher
     $result = $db->select_to_array($sql);
     return $result;
   }
+
+  public static function list_teacher()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM teacher";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
 }

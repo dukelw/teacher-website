@@ -1,0 +1,27 @@
+.list-teacher {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list-teacher th,
+.list-teacher td {
+    padding: 8px;
+    text-align: left;
+}
+
+.list-teacher th {
+    background-color: #f2f2f2;
+}
+
+.list-teacher tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.list-teacher tr:hover {
+    background-color: #ddd;
+}
+
+.list-teacher th,
+.list-teacher td {
+    border: 1px solid #ddd;
+}

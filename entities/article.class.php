@@ -77,6 +77,17 @@ class Article
     return $result;
   }
 
+  public static function list_articles_by_keyword($keywork, $start, $limit)
+  {
+    if ($keywork != '') {
+      $db = new Db();
+      $sql = "SELECT * FROM article WHERE title LIKE '%$keywork%' OR description LIKE '%$keywork%' LIMIT $start, $limit";
+      $result = $db->select_to_array($sql);
+      return $result;
+    }
+  }
+
+
   public static function list_articles_pagination_type($start, $limit, $type)
   {
     $db = new Db();
@@ -117,10 +128,34 @@ class Article
     return $result;
   }
 
+  public static function list_notifications_pagination($start, $limit)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti = 'notification' LIMIT $start, $limit";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_notifications_pagination_type($start, $limit, $type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti = 'notification' AND TYPE = $type LIMIT $start, $limit";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
   public static function list_articles_by_type($type)
   {
     $db = new Db();
     $sql = "SELECT * FROM article WHERE type='$type' AND isNoti != 'notification'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_notifications_by_type($type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE type='$type' AND isNoti = 'notification'";
     $result = $db->select_to_array($sql);
     return $result;
   }

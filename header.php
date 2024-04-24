@@ -83,7 +83,7 @@ session_start();
 
 <div class="nav-scroller py-1 mb-2">
   <nav class="nav d-flex justify-content-between">
-    <a class="p-2 text-muted" href="#">Giới thiệu</a>
+    <a class="p-2 text-muted" href="introduction.php">Giới thiệu</a>
     <a class="p-2 text-muted" href="#">Giáo dục</a>
     <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>

@@ -87,6 +87,14 @@ class Teacher
     return $result;
   }
 
+  public static function list_teacher()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM teacher";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
   public static function update_information($oldEmail, $avatar, $name, $newEmail, $address, $phone, $gender, $birthday)
   {
     $file_temp = $avatar['tmp_name'];

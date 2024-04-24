@@ -87,7 +87,7 @@ session_start();
     <a class="p-2 text-muted" href="#">Giáo dục</a>
     <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>
-    <a class="p-2 text-muted" href="#">Doanh nghiệp</a>
+    <a class="p-2 text-muted" href="./career.php">Doanh nghiệp</a>
     <a class="p-2 text-muted" href="#">Tuyển sinh</a>
     <a class="p-2 text-muted" href="#">Cấm thi</a>
   </nav>

@@ -1,0 +1,38 @@
+.block .block-title{
+    border-bottom: 1px solid #1A73E8;
+}
+
+.sidebar-inner a {
+    color: black; /* Đặt màu chữ là đen */
+    text-decoration: none; /* Loại bỏ gạch chân */
+}
+
+.block p{
+    margin: 0px;
+    margin-bottom: 2px;
+    padding: 10px;
+    background-color: #f2f2f2;
+
+}
+
+
+
+.block img{
+    max-width: 100%;
+}
+
+.block .back{
+    background-color: #f95050;
+}
+
+.block p:hover {
+    padding-left: 26px;
+}
+
+.block p:hover a{
+    color: #f95050;
+}
+
+.block .back a{
+    color: white !important;
+}

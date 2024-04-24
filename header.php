@@ -74,7 +74,7 @@ session_start();
             </ul>
           </div>";
       } else {
-        echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign up</a>";
+        echo "<a class='btn btn-sm btn-outline-secondary' href='./signin.php'>Sign in</a>";
       }
       ?>
     </div>

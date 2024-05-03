@@ -48,9 +48,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="add_article.php">
+                            <a class="nav-link" href="list_article.php">
                                 <span data-feather="shopping-cart"></span>
-                                Articles
+                                Bài báo
                             </a>
                         </li>
                         <li class="nav-item">

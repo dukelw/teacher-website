@@ -12,15 +12,14 @@
 <link href="./css/main.css" rel="stylesheet">
 <link href="./css/update_info.css" rel="stylesheet">
 <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
-<div class="container">
-  <?php
-  include_once("./entities/teacher.class.php");
-  include_once("./header.php");
-  ?>
-</div>
-
 <?php
-if (isset($_POST["name"]) || isset($_FILES["thumbnail"])) {
+echo "<div class='container'>";
+include_once("./entities/teacher.class.php");
+// include_once("./header.php");
+session_start();
+echo "</div>";
+
+if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbnail"])) {
   $name = $_POST["name"];
   $thumbnail = $_FILES["thumbnail"];
   $email = $_POST["email"];

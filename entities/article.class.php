@@ -87,7 +87,6 @@ class Article
     }
   }
 
-
   public static function list_articles_pagination_type($start, $limit, $type)
   {
     $db = new Db();
@@ -173,6 +172,30 @@ class Article
     $db = new Db();
     $sql = "SELECT * FROM article WHERE ID = '$id'";
     $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public function update($id)
+  {
+    $db = new Db();
+    $sql = "UPDATE article SET 
+            title = '" . mysqli_real_escape_string($db->connect(), $this->title) . "',
+            type = '" . mysqli_real_escape_string($db->connect(), $this->type) . "',
+            content = '" . mysqli_real_escape_string($db->connect(), $this->content) . "',
+            description = '" . mysqli_real_escape_string($db->connect(), $this->description) . "',
+            isNoti = '" . mysqli_real_escape_string($db->connect(), $this->noti) . "'
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+
+    $result = $db->query_execute($sql);
+    return $result;
+  }
+
+  public static function delete($id)
+  {
+    $db = new Db();
+    $sql = "DELETE FROM article
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+    $result = $db->query_execute($sql);
     return $result;
   }
 }

@@ -61,6 +61,14 @@ class Article
     return $result;
   }
 
+  public static function list_items()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
   public static function list_articles()
   {
     $db = new Db();

@@ -23,19 +23,9 @@ if (isset($_POST["delete-article"])) {
   <link rel="stylesheet" href="./css/header.css">
 </head>
 
-<body>
+<body style="margin-top: 100px;">
   <div id="toast" class="toast">Bài viết đã được xóa thành công!</div>
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="dashboard.php">Trang chủ</a>
-      <a class="p-2 text-muted" href="list_article.php">Tất cả bài viết</a>
-      <a class="p-2 text-muted" href="add_article.php">Thêm bài viết mới</a>
-      <!-- <a class="p-2 text-muted" href="news.php">Tin tức</a>
-      <a class="p-2 text-muted" href="./career.php">Doanh nghiệp</a>
-      <a class="p-2 text-muted" href="#">Tuyển sinh</a>
-      <a class="p-2 text-muted" href="#">Cấm thi</a> -->
-    </nav>
-  </div>
+  <?php include_once('./dashboardheader.php') ?>
   <main class="table" id="customers_table">
     <section class="table__header">
       <h1>Tất cả bài viết</h1>
@@ -58,7 +48,7 @@ if (isset($_POST["delete-article"])) {
         </thead>
         <tbody>
           <?php
-          $articles = Article::list_articles();
+          $articles = Article::list_items();
           $order = 1;
           foreach ($articles as $article) {
             $type = "notification";
@@ -72,8 +62,8 @@ if (isset($_POST["delete-article"])) {
             }
             echo "<tr>
               <td>" . $order . "</td>
-              <td> <img src='" . $article["THUMBNAIL"] . "' alt=''>" . $article["TITLE"] . "</td>
-              <td>" . $article["DESCRIPTION"] . "</td>
+              <td> <img src='" . $article["THUMBNAIL"] . "' alt='Ảnh hiển thị của bài báo'><a class='article-item' href='article_detail.php?id=" . $article["ID"] . "'>" . $article["TITLE"] . "</a></td>
+              <td><a class='article-item' href='article_detail.php?id=" . $article["ID"] . "'>" . $article["DESCRIPTION"] . "</a></td>
               <td>" . $article["PUBLISH"] . "</td>
               <td>
                 <p class='status " . $type . "'>" . $subject . "</p>
@@ -99,6 +89,7 @@ if (isset($_POST["delete-article"])) {
   <form hidden action="" class="delete-form" method="POST">
     <input type="text" name="delete-article" class="delete-article">
   </form>
+  <a class="add-article-btn" href="add_article.php">Thêm bài viết</a>
   <script src="./js/list_article.js"></script>
   <script>
     function handleDelete(ID) {

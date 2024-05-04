@@ -317,9 +317,9 @@ if (isset($_POST["btnsubmit"])) {
         <div class="col-md-12">
           <input style="display: none;" type="text" name="txtContent" class="form-control" id="content" required>
         </div>
-        <input type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
-                                                        echo $_GET["edit-article"];
-                                                      } ?>">
+        <input hidden type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
+                                                                echo $_GET["edit-article"];
+                                                              } ?>">
         <div class="col-12 mb-4">
           <button class="btn btn-primary" name="btnsubmit" type="submit">Cập nhật bài viết</button>
         </div>

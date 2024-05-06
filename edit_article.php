@@ -1,25 +1,57 @@
 <?php
 include_once("./entities/subject.class.php");
 include_once("./entities/article.class.php");
-include_once("./dashboardheader.php");
+
+if (isset($_GET['edit-article'])) {
+  $editingArticle = Article::get_article($_GET['edit-article']);
+}
+
 if (isset($_POST["btnsubmit"])) {
+  $originalArticle = Article::get_article($_POST['edit-article']);
   $title = $_POST["txtName"];
   $type = intval($_POST["txtCategory"]);
   $content = $_POST["txtContent"];
   $description = $_POST["txtDescription"];
-  $picture = $_FILES["txtThumbnail"];
   $noti = $_POST["txtType"];
 
-  // Set CONSTANT values for test
-  $publish = date("Y-m-d");
-  $author = "Lê Phan Thế Vĩ";
-  $aid = intval("1");
-  $newArticle = new Article($title, $type, $content, $publish, $author, $aid, $picture, $description, $noti);
-  $result = $newArticle->save();
+  if ($title != $originalArticle[0]['TITLE']) {
+    $originalArticle[0]['TITLE'] = $title;
+  }
+
+  if ($type != $originalArticle[0]['TYPE']) {
+    $originalArticle[0]['TYPE'] = $type;
+  }
+
+  if ($content != $originalArticle[0]['CONTENT']) {
+    $originalArticle[0]['CONTENT'] = $content;
+  }
+
+  if ($description != $originalArticle[0]['DESCRIPTION']) {
+    $originalArticle[0]['DESCRIPTION'] = $description;
+  }
+
+  if ($noti != $originalArticle[0]['isNoti']) {
+    $originalArticle[0]['isNoti'] = $noti;
+  }
+
+  $newArticle = new Article(
+    $originalArticle[0]['TITLE'],
+    $originalArticle[0]['TYPE'],
+    $originalArticle[0]['CONTENT'],
+    $originalArticle[0]['PUBLISH'],
+    $originalArticle[0]['AUTHOR'],
+    $originalArticle[0]['AID'],
+    $originalArticle[0]['THUMBNAIL'],
+    $originalArticle[0]['DESCRIPTION'],
+    $originalArticle[0]['isNoti']
+  );
+
+  $result = $newArticle->update($_POST['edit-article']);
+
   if ($result) {
     header("Location: list_article.php");
   } else {
-    echo "Thêm thất bại";
+    echo "Cập nhật thất bại";
   }
 }
 ?>
@@ -29,22 +61,18 @@ if (isset($_POST["btnsubmit"])) {
 
 <head>
   <meta charset="utf-8">
-  <title>Thêm bài báo</title>
+  <title>Cập nhật bài báo</title>
   <link rel="stylesheet" href="./css/add_article.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
-  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="./dashboard.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="main container" style="margin-top: 100px;">
-    <h3 class="pb-3 font-italic border-bottom">
-      Thêm bài viết
-    </h3>
-    <form action="#" method="post">
+  <div class="container mt-4">
+    <h1>Cập nhật bài báo</h1>
+    <form action="" method="post">
       <div id="editor"></div>
     </form>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/super-build/ckeditor.js"></script>
@@ -202,13 +230,10 @@ if (isset($_POST["btnsubmit"])) {
             'CaseChange'
           ]
         }).then(newEditor => {
+          const main = document.getElementById("main");
+          const content = document.getElementById("content");
           editor = newEditor;
-          editor.model.document.on('change:data', () => {
-            const main = document.getElementById("main");
-            const content = document.getElementById("content");
-            main.innerHTML = editor.getData();
-            content.value = editor.getData();
-          });
+          editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
         })
         .catch(error => {
           console.error(error);
@@ -217,31 +242,35 @@ if (isset($_POST["btnsubmit"])) {
     <script>
       let submitBtn = document.getElementById("submit");
       const main = document.getElementById("main")
-
-      // submitBtn.addEventListener('click', (e) => {
-
-      // })
     </script>
     <div class="container mt-4">
-      <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="add_article.php" novalidate>
+      <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="edit_article.php" novalidate>
         <div class="col-md-6">
           <label for="name" class="form-label">Tiêu đề</label>
-          <input type="text" name="txtName" class="form-control" id="name" required>
+          <input type="text" name="txtName" class="form-control" id="name" required value="<?php if (isset($_GET['edit-article'])) {
+                                                                                              echo $editingArticle[0]["TITLE"];
+                                                                                            } ?>">
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="col-md-6">
-          <label for="category" class="form-label">Thể loại</label>
+          <label for="category" class="form-label">Danh mục</label>
           <select class="form-select" name="txtCategory" id="category" required>
             <option selected disabled value="">Choose...</option>
             <?php
             $subjects = Subject::list_subject();
             foreach ($subjects as $subject) {
-              echo "<option value=" . $subject['ID'] . ">" . $subject["NAME"] . "</option>";
+              if ((isset($_GET['edit-article']))) {
+                $selected = ($editingArticle[0]["TYPE"] == $subject['ID']) ? 'selected' : '';
+                echo "<option value=" . $subject['ID'] . " " . $selected . ">" . $subject["NAME"] . "</option>";
+              } else {
+                echo "<option value=" . $subject['ID'] . ">" . $subject["NAME"] . "</option>";
+              }
             }
             ?>
           </select>
+
           <div class="invalid-feedback">
             Please select a valid state.
           </div>
@@ -250,23 +279,37 @@ if (isset($_POST["btnsubmit"])) {
           <label for="type" class="form-label">Thể loại</label>
           <select class="form-select" name="txtType" id="type" required>
             <option selected disabled value="">--Chọn loại bài viết--</option>
-            <option value="article">Bài báo</option>
-            <option value="notification">Thông báo</option>
+            <?php
+            if ((isset($_GET['edit-article']))) {
+              if ($editingArticle[0]["isNoti"] == "article") {
+                echo "<option value='article' selected>Bài báo</option>
+                  <option value='notification'>Thông báo</option>";
+              } else {
+                echo "<option value='article'>Bài báo</option>
+                <option value='notification' selected>Thông báo</option>";
+              }
+            } else {
+              echo "<option value='article'>Bài báo</option>
+              <option value='notification'>Thông báo</option>";
+            }
+            ?>
           </select>
           <div class="invalid-feedback">
             Please select a valid state.
           </div>
         </div>
         <div class="col-md-6">
-          <label for="thumbnail" class="form-label">Hình nền</label>
-          <input type="file" accept=".PNG, .GIF, .JPG" name="txtThumbnail" class="form-control" id="thumbnail" required>
+          <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
+            <span>Hình hiện tại</span>
+            <img src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail" style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
+          <?php } ?>
           <div class="invalid-feedback">
-            Please provide a valid city.
+            Hãy chọn ảnh mới
           </div>
         </div>
         <div class="col-md-12">
           <label for="description" class="form-label">Mô tả</label>
-          <textarea type="text" name="txtDescription" class="form-control" id="description" required> </textarea>
+          <textarea type="text" name="txtDescription" class="form-control" id="description" required><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
           <div class="invalid-feedback">
             Please describe the product.
           </div>
@@ -274,25 +317,15 @@ if (isset($_POST["btnsubmit"])) {
         <div class="col-md-12">
           <input style="display: none;" type="text" name="txtContent" class="form-control" id="content" required>
         </div>
-        <div class="col-12">
-          <button class="btn btn-primary" name="btnsubmit" type="submit">Tạo bài viết</button>
+        <input hidden type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
+                                                                echo $_GET["edit-article"];
+                                                              } ?>">
+        <div class="col-12 mb-4">
+          <button class="btn btn-primary" name="btnsubmit" type="submit">Cập nhật bài viết</button>
         </div>
       </form>
     </div>
-    <?= "<h1 class='spacer'>Bài viết hiện tại</h1>" ?>
-    <div id="main"></div>
   </div>
 </body>
 
 </html>
-
-<style>
-  .main {
-    width: 82vw;
-    background-color: #fff5;
-    backdrop-filter: blur(7px);
-    box-shadow: 0 0.4rem 0.8rem #0005;
-    border-radius: 0.8rem;
-    padding: 20px;
-  }
-</style>

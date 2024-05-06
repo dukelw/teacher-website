@@ -61,6 +61,14 @@ class Article
     return $result;
   }
 
+  public static function list_items()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
   public static function list_articles()
   {
     $db = new Db();
@@ -75,6 +83,16 @@ class Article
     $sql = "SELECT * FROM article WHERE isNoti != 'notification' LIMIT $start, $limit";
     $result = $db->select_to_array($sql);
     return $result;
+  }
+
+  public static function list_articles_by_keyword($keywork, $start, $limit)
+  {
+    if ($keywork != '') {
+      $db = new Db();
+      $sql = "SELECT * FROM article WHERE title LIKE '%$keywork%' OR description LIKE '%$keywork%' LIMIT $start, $limit";
+      $result = $db->select_to_array($sql);
+      return $result;
+    }
   }
 
   public static function list_articles_pagination_type($start, $limit, $type)
@@ -117,10 +135,34 @@ class Article
     return $result;
   }
 
+  public static function list_notifications_pagination($start, $limit)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti = 'notification' LIMIT $start, $limit";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_notifications_pagination_type($start, $limit, $type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE isNoti = 'notification' AND TYPE = $type LIMIT $start, $limit";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
   public static function list_articles_by_type($type)
   {
     $db = new Db();
     $sql = "SELECT * FROM article WHERE type='$type' AND isNoti != 'notification'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_notifications_by_type($type)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM article WHERE type='$type' AND isNoti = 'notification'";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -138,6 +180,30 @@ class Article
     $db = new Db();
     $sql = "SELECT * FROM article WHERE ID = '$id'";
     $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public function update($id)
+  {
+    $db = new Db();
+    $sql = "UPDATE article SET 
+            title = '" . mysqli_real_escape_string($db->connect(), $this->title) . "',
+            type = '" . mysqli_real_escape_string($db->connect(), $this->type) . "',
+            content = '" . mysqli_real_escape_string($db->connect(), $this->content) . "',
+            description = '" . mysqli_real_escape_string($db->connect(), $this->description) . "',
+            isNoti = '" . mysqli_real_escape_string($db->connect(), $this->noti) . "'
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+
+    $result = $db->query_execute($sql);
+    return $result;
+  }
+
+  public static function delete($id)
+  {
+    $db = new Db();
+    $sql = "DELETE FROM article
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+    $result = $db->query_execute($sql);
     return $result;
   }
 }

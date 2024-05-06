@@ -44,6 +44,25 @@ if (isset($_GET["id"]) == null) {
           Tag:
           <a href="news.php?page=1&subject=<?= $article[0]['TYPE'] ?>" style="padding: 6px 12px; background-color: red; color: white; border-radius: 12px;"><?= Subject::get_subject($article[0]["TYPE"])[0]["NAME"] ?></a>
         </p>
+        <h3 class="pb-3 font-italic border-bottom">
+          Bình luận
+        </h3>
+        <div class="comment-container">
+          <textarea class="comment-input-box" placeholder="Nhập bình luận tại đây..." id="comment"></textarea>
+          <div class="comment__card">
+            <h3 class="comment__title">The first comment</h3>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum
+              eaque itaque sit tempora officiis, quisquam atque? Impedit
+              dignissimos error laudantium!
+            </p>
+            <div class="comment__card-footer">
+              <div>Likes 123</div>
+              <div>Dislikes 23</div>
+              <div class="show-replies">Reply 2</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <aside class="col-md-3 blog-sidebar">

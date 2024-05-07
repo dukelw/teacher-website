@@ -2,7 +2,7 @@
 require_once("./config/db.class.php");
 ?>
 <?php
-class Teacher
+class User
 {
   public $ID;
   public $name;
@@ -50,7 +50,7 @@ class Teacher
       return false;
     }
     $db = new Db();
-    $sql = "INSERT INTO teacher (name, mail, password, avatar, gender, phone, birthday, joinyear, fired, position) VALUES (
+    $sql = "INSERT INTO user (name, mail, password, avatar, gender, phone, birthday, joinyear, fired, position) VALUES (
       '" . mysqli_real_escape_string($db->connect(), $this->name) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->mail) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->password) . "',
@@ -69,7 +69,7 @@ class Teacher
   public static function checkLogin($mail, $password)
   {
     $db = new Db();
-    $sql = "SELECT * FROM teacher WHERE mail = '$mail' AND password = '$password'";
+    $sql = "SELECT * FROM user WHERE mail = '$mail' AND password = '$password'";
     $result = $db->query_execute($sql);
 
     if ($result->num_rows > 0) {
@@ -79,18 +79,26 @@ class Teacher
     }
   }
 
-  public static function get_teacher($email)
+  public static function get_user($email)
   {
     $db = new Db();
-    $sql = "SELECT * FROM teacher WHERE mail = '$email'";
+    $sql = "SELECT * FROM user WHERE mail = '$email'";
     $result = $db->select_to_array($sql);
     return $result;
   }
 
-  public static function list_teacher()
+  public static function get_user_by_ID($id)
   {
     $db = new Db();
-    $sql = "SELECT * FROM teacher";
+    $sql = "SELECT * FROM user WHERE ID = '$id'";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function list_user()
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM user";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -106,9 +114,9 @@ class Teacher
     }
 
     $db = new Db();
-    $sql = "UPDATE teacher SET mail = '$newEmail', avatar = '$filepath', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
+    $sql = "UPDATE user SET mail = '$newEmail', avatar = '$filepath', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
     if (!$avatar) {
-      $sql = "UPDATE teacher SET mail = '$newEmail', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
+      $sql = "UPDATE user SET mail = '$newEmail', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
     }
     $result = $db->query_execute($sql);
     if ($result) {

@@ -16,34 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `doccategory`
 --
 
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `doccategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
+CREATE TABLE `doccategory` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `gender` tinyint(1) DEFAULT '0',
-  `phone` varchar(10) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `password` varchar(100) NOT NULL,
-  `avatar` varchar(100) NOT NULL,
-  `joinyear` date DEFAULT NULL,
-  `fired` tinyint(1) DEFAULT '0',
+  `CATENAME` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `doccategory`
 --
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+LOCK TABLES `doccategory` WRITE;
+/*!40000 ALTER TABLE `doccategory` DISABLE KEYS */;
+INSERT INTO `doccategory` VALUES (1,'Báo cáo');
+/*!40000 ALTER TABLE `doccategory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -75,11 +75,11 @@ class Comment
   }
 
 
-  public static function get_all_parent_comment()
+  public static function get_all_parent_comment($id)
   {
     $db = new Db();
 
-    $sql = "SELECT * FROM comment WHERE parentID = '-1'";
+    $sql = "SELECT * FROM comment WHERE parentID = '-1' AND titleID = '{$id}'";
     $result = $db->select_to_array($sql);
 
     return $result;

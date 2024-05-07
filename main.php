@@ -27,7 +27,6 @@ include_once ("./entities/subject.class.php");
 </head>
 
 <body>
-    <?php include_once ("./header_topbar.php") ?>
     <div class="container">
         <?php include_once ("./header.php");
         include_once ("./slider.php")

@@ -1,15 +1,18 @@
 <?php
-include_once("./entities/article.class.php");
+include_once ("./entities/article.class.php");
 session_start();
 ?>
 
 <link rel="stylesheet" href="./css/header.css">
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 pt-1 d-flex justify-content-center align-items-start flex-column search-container">
+    <div
+      class="col-4 pt-1 d-flex justify-content-center align-items-start flex-column search-container">
       <div class="col-12 pt-1 d-flex justify-content-start align-items-center">
         <span class="text-muted search-toggle">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="mx-3">
             <circle cx="10.5" cy="10.5" r="7.5"></circle>
             <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
           </svg>
@@ -17,7 +20,9 @@ session_start();
         <form action="#" class="search-wrapper">
           <input class="search-box" type="text" placeholder="Nhập từ khóa...">
           <span class="search-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="mx-3">
               <circle cx="10.5" cy="10.5" r="7.5"></circle>
               <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
             </svg>
@@ -38,7 +43,7 @@ session_start();
           if (count($foundArticles) != 0) {
             foreach ($foundArticles as $foundArticle) {
               echo
-              "<li class=''>
+                "<li class=''>
                   <div class='d-flex justify-content-between align-items-center'>
                     <img class='news-image' src='" . $foundArticle["THUMBNAIL"] . "' alt='Thumbnail'/>
                     <p>
@@ -60,7 +65,7 @@ session_start();
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
       <?php
-      include_once("./entities/teacher.class.php");
+      include_once ("./entities/teacher.class.php");
       if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
         echo "
           <div class='user-info'>
@@ -85,6 +90,7 @@ session_start();
   <nav class="nav d-flex justify-content-between">
     <a class="p-2 text-muted" href="introduction.php">Giới thiệu</a>
     <a class="p-2 text-muted" href="education.php">Giáo dục</a>
+    <a class="p-2 text-muted" href="document.php">Tài liệu</a>
     <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>
     <a class="p-2 text-muted" href="./career.php">Doanh nghiệp</a>
@@ -110,19 +116,19 @@ session_start();
   const searchIcon = document.querySelector('.search-icon')
   const hiddenInput = document.querySelector('input[name="keysearch"]')
   const closeBtn = document.querySelector('.close-btn')
-  searchToggle.onclick = function(event) {
+  searchToggle.onclick = function (event) {
     searchWrapper.classList.add('active-flex');
     searchToggle.classList.add('hide')
     searchBox.focus()
   }
 
-  searchIcon.onclick = function(event) {
+  searchIcon.onclick = function (event) {
     var keySearch = searchBox.value.trim()
     hiddenInput.value = keySearch
     searchWrapper.submit();
   }
 
-  searchBox.addEventListener('keypress', function(event) {
+  searchBox.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault();
       var keySearch = searchBox.value.trim();
@@ -133,7 +139,7 @@ session_start();
 
 
   if (closeBtn != null) {
-    closeBtn.onclick = function(event) {
+    closeBtn.onclick = function (event) {
       hiddenInput.value = ''
       searchWrapper.submit();
     }

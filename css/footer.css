@@ -34,12 +34,12 @@
   cursor: pointer;
 }
 
-.footer-second:hover div {
+.footer-second:hover div div {
   color: red !important;
 }
 
 .block-title {
-  font-family: 'Nunito', sans-serif !important;
+  font-family: "Nunito", sans-serif !important;
   font-size: 22.05px;
   padding: 10px 0 10px;
   font-weight: 700;

@@ -1,6 +1,6 @@
 <?php
-include_once("./entities/article.class.php");
-include_once("./entities/subject.class.php");
+include_once ("./entities/article.class.php");
+include_once ("./entities/subject.class.php");
 ?>
 
 <!doctype html>
@@ -28,9 +28,9 @@ include_once("./entities/subject.class.php");
 
 <body>
     <div class="container">
-        <?php include_once("./header.php");
-        include_once("./slider.php")
-        ?>
+        <?php include_once ("./header.php");
+        include_once ("./slider.php")
+            ?>
         <?php
         $articles = Article::list_articles();
         $featureone = $articles[count($articles) - 1];
@@ -65,7 +65,7 @@ include_once("./entities/subject.class.php");
                 </div>
             </div>
         </div>"
-        ?>
+            ?>
     </div>
 
     <main role="main" class="container">
@@ -159,9 +159,11 @@ include_once("./entities/subject.class.php");
         </div>
     </main>
 
-    <?php include_once("./footer.php") ?>
+    <?php include_once ("./footer.php") ?>
 
-    <script src="./assets/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="./assets/js/jquery-slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script>
         window.jQuery || document.write('<script src="./assets/js/jquery-slim.min.js"><\/script>')
     </script>

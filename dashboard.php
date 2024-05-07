@@ -1,5 +1,6 @@
 <?php
-include_once('./entities/article.class.php');
+include_once ('./entities/article.class.php');
+include_once ('./entities/document.class.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,14 +18,15 @@ include_once('./entities/article.class.php');
 </head>
 
 <body>
-    <?php include_once("./dashboardheader.php") ?>
+    <?php include_once ("./dashboardheader.php") ?>
     <div class="main">
         <h3 class="pb-3 font-italic border-bottom">
             Tất cả
         </h3>
         <div class="row">
             <div class="col-md-3 d-flex justify-content-center">
-                <div class="statistic-item article d-flex justify-content-center align-items-center">
+                <div
+                    class="statistic-item article d-flex justify-content-center align-items-center">
                     <img class="statistic-image" src="./upload/article.png" alt="">
                     <div class="d-flex flex-column justify-content-center align-items-between">
                         <h2><?= count(Article::list_items()) ?></h2>
@@ -33,10 +35,11 @@ include_once('./entities/article.class.php');
                 </div>
             </div>
             <div class="col-md-3 d-flex justify-content-center">
-                <div class="statistic-item file article d-flex justify-content-center align-items-center">
+                <div
+                    class="statistic-item file article d-flex justify-content-center align-items-center">
                     <img class="statistic-image" src="./upload/file.png" alt="">
                     <div class="d-flex flex-column justify-content-center align-items-between">
-                        <h2>123456</h2>
+                        <h2><?= count(Document::list_document_with_category()) ?></h2>
                         <p class="statistic-content">Tệp</p>
                     </div>
                 </div>
@@ -51,7 +54,8 @@ include_once('./entities/article.class.php');
                 </div>
             </div>
             <div class="col-md-3 d-flex justify-content-center">
-                <div class="statistic-item article d-flex justify-content-center align-items-center">
+                <div
+                    class="statistic-item article d-flex justify-content-center align-items-center">
                     <img class="statistic-image" src="./upload/article.png" alt="">
                     <div class="d-flex flex-column justify-content-center align-items-between">
                         <h2>123456</h2>
@@ -60,7 +64,7 @@ include_once('./entities/article.class.php');
                 </div>
             </div>
         </div>
-        <?php include_once("./list_article.php") ?>
+        <?php include_once ("./list_article.php") ?>
     </div>
 </body>
 

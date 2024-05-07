@@ -1,6 +1,6 @@
 <?php
-include_once("./entities/subject.class.php");
-include_once("./entities/article.class.php");
+include_once ("./entities/subject.class.php");
+include_once ("./entities/article.class.php");
 
 if (isset($_POST["delete-article"])) {
   $delete_id = $_POST["delete-article"];
@@ -25,7 +25,7 @@ if (isset($_POST["delete-article"])) {
 
 <body style="margin-top: 100px;">
   <div id="toast" class="toast">Bài viết đã được xóa thành công!</div>
-  <?php include_once('./dashboardheader.php') ?>
+  <?php include_once ('./dashboardheader.php') ?>
   <main class="table" id="customers_table">
     <section class="table__header">
       <h1>Tất cả bài viết</h1>
@@ -102,7 +102,7 @@ if (isset($_POST["delete-article"])) {
         const toast = document.getElementById('toast');
         toast.classList.add('show');
 
-        setTimeout(function() {
+        setTimeout(function () {
           toast.classList.remove('show');
         }, 3000);
       }

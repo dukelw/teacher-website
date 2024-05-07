@@ -103,8 +103,9 @@
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
-  min-width: 100%;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  /* min-width: 100%; */
+  margin-bottom: 4px;
+  /* box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); */
 }
 
 .comment__card h3,
@@ -119,4 +120,65 @@
   gap: 30px;
   justify-content: flex-end;
   align-items: center;
+}
+
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.reply-relate {
+  margin-left: 60px;
+}
+
+.submitbtn, .submitbtn-reply {
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 4px 12px;
+  background-color: black;
+  border: 2px solid white;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+
+.submitbtn:hover,
+.submitbtn-reply:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.action {
+  margin-right: 20px;
+}
+
+.action:hover {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+}
+
+.info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.actions {
+  display: flex;
 }

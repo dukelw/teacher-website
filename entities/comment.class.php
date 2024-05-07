@@ -5,6 +5,7 @@ require_once("./config/db.class.php");
 class Comment
 {
   public $ID;
+  public $articleID;
   public $content;
   public $parentID;
   public $userID;
@@ -14,71 +15,91 @@ class Comment
 
   public function __construct(
     $content,
+    $articleID,
     $parentID,
     $userID,
     $createAt,
     $like,
-    $dislike
+    $dislike,
   ) {
+    $this->articleID = $articleID;
     $this->content = $content;
     $this->parentID = $parentID;
     $this->userID = $userID;
-    $this->$createAt = $createAt;
-    $this->$like = $like;
-    $this->$dislike = $dislike;
+    $this->createAt = $createAt;
+    $this->like = $like;
+    $this->dislike = $dislike;
   }
 
-  public function save()
+  public static function createComment($title_id, $user_id, $user_name, $user_thumb, $parent_name, $content, $parentID)
   {
     $db = new Db();
-    $sql = "INSERT INTO comment (content, parentID, userID, createAt, likeNum, dislikeNum) VALUES (
-      '" . mysqli_real_escape_string($db->connect(), $this->content) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->parentID) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->userID) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->createAt) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->like) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->dislike) . "',
+    // Set timezone to GMT +7
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $publish = date("Y-m-d H:i:s");
+
+    // Create a new Comment object
+    $comment = new Comment(
+      $content,
+      $title_id,
+      $parentID,
+      $user_id,
+      $publish,
+      0, // initial like count
+      0  // initial dislike count
+    );
+
+    $sql = "INSERT INTO comment (content, titleID, parentID, userID, createAt, likeNum, dislikeNum) VALUES (
+        '" . mysqli_real_escape_string($db->connect(), $comment->content) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->articleID) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->parentID) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->userID) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->createAt) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->like) . "',
+        '" . mysqli_real_escape_string($db->connect(), $comment->dislike) . "'
     )";
     $result = $db->query_execute($sql);
+
     return $result;
   }
 
-  public static function get_comment($ID)
+
+  public static function deleteComment($comment_id)
   {
     $db = new Db();
-    $sql = "SELECT * FROM comment WHERE ID = '$ID'";
-    $result = $db->select_to_array($sql);
-    return $result;
-  }
 
-  public static function list_comments()
-  {
-    $db = new Db();
-    $sql = "SELECT * FROM teacher";
-    $result = $db->select_to_array($sql);
-    return $result;
-  }
-
-  public static function update_information($oldEmail, $avatar, $name, $newEmail, $address, $phone, $gender, $birthday)
-  {
-    if ($avatar) {
-      $file_temp = $avatar['tmp_name'];
-      $user_file = $avatar['name'];
-      $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-      $filepath = "./upload/" . $timestamp . $user_file;
-      move_uploaded_file($file_temp, $filepath);
-    }
-
-    $db = new Db();
-    $sql = "UPDATE teacher SET mail = '$newEmail', avatar = '$filepath', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
-    if (!$avatar) {
-      $sql = "UPDATE teacher SET mail = '$newEmail', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
-    }
+    $sql = "DELETE FROM comment WHERE ID = '{$comment_id}' OR parentID = '{$comment_id}'";
     $result = $db->query_execute($sql);
-    if ($result) {
-      return true;
-    } else {
-      return false;
-    }
+
+    return $result;
+  }
+
+
+  public static function get_all_parent_comment()
+  {
+    $db = new Db();
+
+    $sql = "SELECT * FROM comment WHERE parentID = '-1'";
+    $result = $db->select_to_array($sql);
+
+    return $result;
+  }
+
+  public static function get_comment_by_parentID($product_id, $parentID, $limit = 10, $offset = 0)
+  {
+    $db = new Db();
+    $query = "SELECT * FROM comment WHERE titleID = '$product_id' AND parentID = '$parentID' ";
+    $result = $db->select_to_array($query);
+    return $result;
+  }
+
+  public static function get_all_comment_by_articleID($articleID)
+  {
+    $db = new Db();
+
+    $sql = "SELECT * FROM comment WHERE titleID = '{$articleID}' ORDER BY commentLeft ASC";
+    $result = $db->select_to_array($sql);
+
+    return $result;
   }
 }

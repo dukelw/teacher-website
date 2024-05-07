@@ -106,7 +106,6 @@
             }
           }
 
-
           function displayComments($comments, $depth = 0)
           {
             foreach ($comments as $comment) {
@@ -145,7 +144,7 @@
             }
           }
 
-          $parentComments = Comment::get_all_parent_comment();
+          $parentComments = Comment::get_all_parent_comment($_GET['id']);
           displayComments($parentComments);
           ?>
           <form class="delete-form" action="" method="POST">

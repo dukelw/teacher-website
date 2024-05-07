@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: teacherweb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,37 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `teacher`
+-- Table structure for table `document`
 --
 
-DROP TABLE IF EXISTS `teacher`;
+DROP TABLE IF EXISTS `document`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teacher` (
+CREATE TABLE `document` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  `PASSWORD` varchar(100) DEFAULT NULL,
-  `ADDRESS` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  `AVATAR` varchar(100) DEFAULT NULL,
-  `GENDER` bit(1) DEFAULT NULL,
-  `PHONE` varchar(10) DEFAULT NULL,
-  `MAIL` varchar(50) DEFAULT NULL,
-  `BIRTHDAY` date DEFAULT NULL,
-  `JOINYEAR` date DEFAULT NULL,
-  `FIRED` bit(1) DEFAULT NULL,
-  `POSITION` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `TITLE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `DESCRIPTION` longtext NOT NULL,
+  `PUBLISH` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cateID` int NOT NULL,
+  `docfile` varchar(200) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DOC_Cate` (`cateID`),
+  CONSTRAINT `FK_DOC_Cate` FOREIGN KEY (`cateID`) REFERENCES `doccategory` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `teacher`
+-- Dumping data for table `document`
 --
 
-LOCK TABLES `teacher` WRITE;
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'Thế Vĩ','123456','283 Lê Văn Lương','url_avatar',_binary '','0123456789','thevi16102004@gmail.com','2004-10-16','2024-04-12',_binary '\0','chức vụ');
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+LOCK TABLES `document` WRITE;
+/*!40000 ALTER TABLE `document` DISABLE KEYS */;
+INSERT INTO `document` VALUES (10,'Báo cáo cuối kì web!','oke rồi đó.','2024-05-07 00:00:00',1,'./upload/documents/6639c3674fc96_GK2023-2024.pdf');
+/*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18  0:54:43
+-- Dump completed on 2024-05-07 23:21:03

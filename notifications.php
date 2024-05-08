@@ -42,7 +42,7 @@ include_once("./entities/subject.class.php");
           </h3>";
         } else {
           echo "<h3 class='pb-3 font-italic border-bottom'>
-            Tất cả tin tức
+            Tất cả thông báo
           </h3>";
         }
         ?>

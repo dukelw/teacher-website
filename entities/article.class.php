@@ -206,4 +206,17 @@ class Article
     $result = $db->query_execute($sql);
     return $result;
   }
+
+  public static function to_string($article)
+  {
+    echo "TITLE: " .  $article->title;
+    echo "TYPE: " . $article->type;
+    echo "CONTENT: " . $article->content;
+    echo "PUBLISH: " . $article->publish;
+    echo "AUTHOR: " . $article->author;
+    echo "AID: " . $article->aid;
+    echo "THUMBNAIL: " . $article->thumbnail;
+    echo "DESCRIPTION: " . $article->description;
+    echo "NOTI: " . $article->noti;
+  }
 }

@@ -22,7 +22,7 @@ if (isset($_POST["btnsubmit"])) {
     $originalArticle[0]['TYPE'] = $type;
   }
 
-  if ($content != $originalArticle[0]['CONTENT']) {
+  if ($content != $originalArticle[0]['CONTENT'] && $content != "") {
     $originalArticle[0]['CONTENT'] = $content;
   }
 
@@ -232,14 +232,15 @@ if (isset($_POST["btnsubmit"])) {
           'PasteFromOfficeEnhanced',
           'CaseChange'
         ]
-      }).then(newEditor => {
-        const main = document.getElementById("main");
-        const content = document.getElementById("content");
-        editor = newEditor;
-        editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
-        main.innerHTML = editor.getData();
-        content.value = editor.getData();
       })
+        .then(newEditor => {
+          editor = newEditor;
+          editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
+          editor.model.document.on('change:data', () => {
+            const main = document.getElementById("main");
+            content.value = editor.getData();
+          });
+        })
         .catch(error => {
           console.error(error);
         });
@@ -323,17 +324,14 @@ if (isset($_POST["btnsubmit"])) {
         </div>
         <div class="col-md-12">
           <label for="description" class="form-label">Mô tả</label>
-          <textarea type="text" name="txtDescription" class="form-control" id="description"
-            required><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
+          <textarea type="text" name="txtDescription" class="form-control" id="description"  re
+           quired><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
           <div class="invalid-feedback">
             Please describe the product.
           </div>
         </div>
-        <div class="col-md-12">
-          <input style="display: none;" type="text" name="txtContent" class="form-control"
-            id="content" required>
-        </div>
-        <input hidden type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
+        <input hidden type="text" name="txtContent" class="form-control" id="content">
+        <input hidden type=" text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
           echo $_GET["edit-article"];
         } ?>">
         <div class="col-12 mb-4">

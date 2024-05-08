@@ -217,10 +217,6 @@ if (isset($_POST["btnsubmit"])) {
     <script>
       let submitBtn = document.getElementById("submit");
       const main = document.getElementById("main")
-
-      // submitBtn.addEventListener('click', (e) => {
-
-      // })
     </script>
     <div class="container mt-4">
       <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="add_article.php" novalidate>
@@ -232,7 +228,7 @@ if (isset($_POST["btnsubmit"])) {
           </div>
         </div>
         <div class="col-md-6">
-          <label for="category" class="form-label">Thể loại</label>
+          <label for="category" class="form-label">Danh mục</label>
           <select class="form-select" name="txtCategory" id="category" required>
             <option selected disabled value="">Choose...</option>
             <?php

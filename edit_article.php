@@ -1,6 +1,6 @@
 <?php
-include_once ("./entities/subject.class.php");
-include_once ("./entities/article.class.php");
+include_once("./entities/subject.class.php");
+include_once("./entities/article.class.php");
 
 if (isset($_GET['edit-article'])) {
   $editingArticle = Article::get_article($_GET['edit-article']);
@@ -20,10 +20,6 @@ if (isset($_POST["btnsubmit"])) {
 
   if ($type != $originalArticle[0]['TYPE']) {
     $originalArticle[0]['TYPE'] = $type;
-  }
-
-  if ($content != $originalArticle[0]['CONTENT']) {
-    $originalArticle[0]['CONTENT'] = $content;
   }
 
   if ($description != $originalArticle[0]['DESCRIPTION']) {
@@ -63,10 +59,7 @@ if (isset($_POST["btnsubmit"])) {
   <meta charset="utf-8">
   <title>Cập nhật bài báo</title>
   <link rel="stylesheet" href="./css/add_article.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
@@ -82,162 +75,162 @@ if (isset($_POST["btnsubmit"])) {
     <script>
       let editor;
       CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-        toolbar: {
-          items: [
-            'exportPDF', 'exportWord', '|',
-            'findAndReplace', 'selectAll', '|',
-            'heading', '|',
-            'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-            'bulletedList', 'numberedList', 'todoList', '|',
-            'outdent', 'indent', '|',
-            'undo', 'redo',
-            '-',
-            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-            'alignment', '|',
-            'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-            'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-            'textPartLanguage', '|',
-            'sourceEditing'
-          ],
-          shouldNotGroupWhenFull: true
-        },
-        list: {
-          properties: {
-            styles: true,
-            startIndex: true,
-            reversed: true
-          }
-        },
-        heading: {
-          options: [{
-            model: 'paragraph',
-            title: 'Paragraph',
-            class: 'ck-heading_paragraph'
+          toolbar: {
+            items: [
+              'exportPDF', 'exportWord', '|',
+              'findAndReplace', 'selectAll', '|',
+              'heading', '|',
+              'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+              'bulletedList', 'numberedList', 'todoList', '|',
+              'outdent', 'indent', '|',
+              'undo', 'redo',
+              '-',
+              'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+              'alignment', '|',
+              'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+              'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+              'textPartLanguage', '|',
+              'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
           },
-          {
-            model: 'heading1',
-            view: 'h1',
-            title: 'Heading 1',
-            class: 'ck-heading_heading1'
+          list: {
+            properties: {
+              styles: true,
+              startIndex: true,
+              reversed: true
+            }
           },
-          {
-            model: 'heading2',
-            view: 'h2',
-            title: 'Heading 2',
-            class: 'ck-heading_heading2'
+          heading: {
+            options: [{
+                model: 'paragraph',
+                title: 'Paragraph',
+                class: 'ck-heading_paragraph'
+              },
+              {
+                model: 'heading1',
+                view: 'h1',
+                title: 'Heading 1',
+                class: 'ck-heading_heading1'
+              },
+              {
+                model: 'heading2',
+                view: 'h2',
+                title: 'Heading 2',
+                class: 'ck-heading_heading2'
+              },
+              {
+                model: 'heading3',
+                view: 'h3',
+                title: 'Heading 3',
+                class: 'ck-heading_heading3'
+              },
+              {
+                model: 'heading4',
+                view: 'h4',
+                title: 'Heading 4',
+                class: 'ck-heading_heading4'
+              },
+              {
+                model: 'heading5',
+                view: 'h5',
+                title: 'Heading 5',
+                class: 'ck-heading_heading5'
+              },
+              {
+                model: 'heading6',
+                view: 'h6',
+                title: 'Heading 6',
+                class: 'ck-heading_heading6'
+              }
+            ]
           },
-          {
-            model: 'heading3',
-            view: 'h3',
-            title: 'Heading 3',
-            class: 'ck-heading_heading3'
+          placeholder: 'Viết bài báo tại đây',
+          fontFamily: {
+            options: [
+              'default',
+              'Arial, Helvetica, sans-serif',
+              'Courier New, Courier, monospace',
+              'Georgia, serif',
+              'Lucida Sans Unicode, Lucida Grande, sans-serif',
+              'Tahoma, Geneva, sans-serif',
+              'Times New Roman, Times, serif',
+              'Trebuchet MS, Helvetica, sans-serif',
+              'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
           },
-          {
-            model: 'heading4',
-            view: 'h4',
-            title: 'Heading 4',
-            class: 'ck-heading_heading4'
+          fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
           },
-          {
-            model: 'heading5',
-            view: 'h5',
-            title: 'Heading 5',
-            class: 'ck-heading_heading5'
+          htmlSupport: {
+            allow: [{
+              name: /.*/,
+              attributes: true,
+              classes: true,
+              styles: true
+            }]
           },
-          {
-            model: 'heading6',
-            view: 'h6',
-            title: 'Heading 6',
-            class: 'ck-heading_heading6'
-          }
-          ]
-        },
-        placeholder: 'Viết bài báo tại đây',
-        fontFamily: {
-          options: [
-            'default',
-            'Arial, Helvetica, sans-serif',
-            'Courier New, Courier, monospace',
-            'Georgia, serif',
-            'Lucida Sans Unicode, Lucida Grande, sans-serif',
-            'Tahoma, Geneva, sans-serif',
-            'Times New Roman, Times, serif',
-            'Trebuchet MS, Helvetica, sans-serif',
-            'Verdana, Geneva, sans-serif'
-          ],
-          supportAllValues: true
-        },
-        fontSize: {
-          options: [10, 12, 14, 'default', 18, 20, 22],
-          supportAllValues: true
-        },
-        htmlSupport: {
-          allow: [{
-            name: /.*/,
-            attributes: true,
-            classes: true,
-            styles: true
-          }]
-        },
-        htmlEmbed: {
-          showPreviews: true
-        },
-        link: {
-          decorators: {
-            addTargetToExternalLinks: true,
-            defaultProtocol: 'https://',
-            toggleDownloadable: {
-              mode: 'manual',
-              label: 'Downloadable',
-              attributes: {
-                download: 'file'
+          htmlEmbed: {
+            showPreviews: true
+          },
+          link: {
+            decorators: {
+              addTargetToExternalLinks: true,
+              defaultProtocol: 'https://',
+              toggleDownloadable: {
+                mode: 'manual',
+                label: 'Downloadable',
+                attributes: {
+                  download: 'file'
+                }
               }
             }
-          }
-        },
-        mention: {
-          feeds: [{
-            marker: '@',
-            feed: [
-              '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-              '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-              '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-              '@sugar', '@sweet', '@topping', '@wafer'
-            ],
-            minimumCharacters: 1
-          }]
-        },
-        removePlugins: [
-          'AIAssistant',
-          'CKBox',
-          'CKFinder',
-          'EasyImage',
-          'MultiLevelList',
-          'RealTimeCollaborativeComments',
-          'RealTimeCollaborativeTrackChanges',
-          'RealTimeCollaborativeRevisionHistory',
-          'PresenceList',
-          'Comments',
-          'TrackChanges',
-          'TrackChangesData',
-          'RevisionHistory',
-          'Pagination',
-          'WProofreader',
-          'MathType',
-          'SlashCommand',
-          'Template',
-          'DocumentOutline',
-          'FormatPainter',
-          'TableOfContents',
-          'PasteFromOfficeEnhanced',
-          'CaseChange'
-        ]
-      }).then(newEditor => {
-        const main = document.getElementById("main");
-        const content = document.getElementById("content");
-        editor = newEditor;
-        editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
-      })
+          },
+          mention: {
+            feeds: [{
+              marker: '@',
+              feed: [
+                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                '@sugar', '@sweet', '@topping', '@wafer'
+              ],
+              minimumCharacters: 1
+            }]
+          },
+          removePlugins: [
+            'AIAssistant',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            'MultiLevelList',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            'MathType',
+            'SlashCommand',
+            'Template',
+            'DocumentOutline',
+            'FormatPainter',
+            'TableOfContents',
+            'PasteFromOfficeEnhanced',
+            'CaseChange'
+          ]
+        }).then(newEditor => {
+          const main = document.getElementById("main");
+          const content = document.getElementById("content");
+          editor = newEditor;
+          editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
+        })
         .catch(error => {
           console.error(error);
         });
@@ -247,13 +240,12 @@ if (isset($_POST["btnsubmit"])) {
       const main = document.getElementById("main")
     </script>
     <div class="container mt-4">
-      <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post"
-        action="edit_article.php" novalidate>
+      <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="edit_article.php" novalidate>
         <div class="col-md-6">
           <label for="name" class="form-label">Tiêu đề</label>
           <input type="text" name="txtName" class="form-control" id="name" required value="<?php if (isset($_GET['edit-article'])) {
-            echo $editingArticle[0]["TITLE"];
-          } ?>">
+                                                                                              echo $editingArticle[0]["TITLE"];
+                                                                                            } ?>">
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -305,8 +297,7 @@ if (isset($_POST["btnsubmit"])) {
         <div class="col-md-6">
           <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
             <span>Hình hiện tại</span>
-            <img src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail"
-              style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
+            <img src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail" style="width: 100px; height: 100px; object-fit: cover; margin-top: 20px; margin-left: 12px;">
           <?php } ?>
           <div class="invalid-feedback">
             Hãy chọn ảnh mới
@@ -314,19 +305,17 @@ if (isset($_POST["btnsubmit"])) {
         </div>
         <div class="col-md-12">
           <label for="description" class="form-label">Mô tả</label>
-          <textarea type="text" name="txtDescription" class="form-control" id="description"
-            required><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
+          <textarea type="text" name="txtDescription" class="form-control" id="description" required><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
           <div class="invalid-feedback">
             Please describe the product.
           </div>
         </div>
         <div class="col-md-12">
-          <input style="display: none;" type="text" name="txtContent" class="form-control"
-            id="content" required>
+          <input style="display: none;" type="text" name="txtContent" class="form-control" id="content" required>
         </div>
         <input hidden type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
-          echo $_GET["edit-article"];
-        } ?>">
+                                                                echo $_GET["edit-article"];
+                                                              } ?>">
         <div class="col-12 mb-4">
           <button class="btn btn-primary" name="btnsubmit" type="submit">Cập nhật bài viết</button>
         </div>

@@ -4,8 +4,6 @@ if (isset($_SESSION['username']) != "") {
     header('Location: main.php');
 }
 if (isset($_POST["email"]) && isset($_POST["password"])) {
-    echo "Email: " . $_POST["email"];
-    echo "Password: " . $_POST["password"];
     $success = User::checkLogin($_POST["email"], $_POST["password"]);
     if (!$success) {
 ?>
@@ -21,7 +19,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         $_SESSION['username'] = $username[0]["NAME"];
         $_SESSION['useremail'] = $email;
         $_SESSION['userthumb'] = $username[0]['THUMBNAIL'];
-        header('Location: dashboard.php');
+        header('Location: main.php');
     }
 }
 ?>

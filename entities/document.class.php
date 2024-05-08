@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/db.class.php");
+require_once("./config/db.class.php");
 
 class Document
 {
@@ -9,14 +9,16 @@ class Document
   public $publish;
   public $cateID;
   public $docfile;
+  public $subject;
 
-  public function __construct($_title, $_description, $_cateID, $_docfile, $_publish)
+  public function __construct($_title, $_description, $_cateID, $_docfile, $_publish, $_subject)
   {
     $this->title = $_title;
     $this->description = $_description;
     $this->cateID = $_cateID;
     $this->docfile = $_docfile;
     $this->publish = $_publish;
+    $this->subject = $_subject;
   }
 
   public function getTitle()
@@ -53,6 +55,15 @@ class Document
     return $db->select_to_array($sql);
   }
 
+  public static function list_document_by_major($major)
+  {
+    $db = new Db();
+    $sql = "SELECT d.*, dc.CATENAME 
+                FROM document d 
+                JOIN doccategory dc ON d.cateID = dc.ID WHERE subject = '$major'";
+    return $db->select_to_array($sql);
+  }
+
   public static function get_document($id)
   {
     $db = new Db();
@@ -75,12 +86,13 @@ class Document
     }
 
     $db = new Db();
-    $sql = "INSERT INTO document (title, description, publish, cateID, docfile) VALUES (
+    $sql = "INSERT INTO document (title, description, publish, cateID, docfile, subject) VALUES (
         '" . mysqli_real_escape_string($db->connect(), $this->title) . "',
         '" . mysqli_real_escape_string($db->connect(), $this->description) . "',
         '" . mysqli_real_escape_string($db->connect(), $this->publish) . "',
         '" . mysqli_real_escape_string($db->connect(), $this->cateID) . "',
-        '" . mysqli_real_escape_string($db->connect(), $filepath) . "'
+        '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
+        '" . mysqli_real_escape_string($db->connect(), $this->subject) . "'
     )";
     $result = $db->query_execute($sql);
     return $result;
@@ -118,7 +130,8 @@ class Document
             description = '" . mysqli_real_escape_string($db->connect(), $this->description) . "', 
             publish = '" . mysqli_real_escape_string($db->connect(), $this->publish) . "', 
             cateID = '" . mysqli_real_escape_string($db->connect(), $this->cateID) . "', 
-            docfile = '" . mysqli_real_escape_string($db->connect(), $filepath) . "' 
+            docfile = '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
+            subject = '" . mysqli_real_escape_string($db->connect(), $this->subject) . "'
             WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
 
     // Execute the SQL query
@@ -128,7 +141,6 @@ class Document
     return $result;
   }
 
-
   public static function delete($id)
   {
     $db = new Db();
@@ -137,5 +149,14 @@ class Document
     $result = $db->query_execute($sql);
     return $result;
   }
+
+  public static function to_string($document)
+  {
+    echo $document->title;
+    echo $document->description;
+    echo $document->cateID;
+    echo $document->docfile;
+    echo $document->publish;
+    echo $document->subject;
+  }
 }
-?>

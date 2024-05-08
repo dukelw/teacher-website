@@ -8,13 +8,11 @@ class User
   public $name;
   public $mail;
   public $password;
+  public $address;
   public $avatar;
   public $gender;
   public $phone;
   public $birthday;
-  public $joinyear;
-  public $fired;
-  public $position;
 
   public function __construct(
     $name,
@@ -24,20 +22,16 @@ class User
     $gender,
     $phone,
     $birthday,
-    $joinyear,
-    $fired,
-    $position,
+    $address
   ) {
     $this->name = $name;
     $this->mail = $mail;
     $this->password = $password;
-    $this->$avatar = $avatar;
-    $this->$gender = $gender;
-    $this->$phone = $phone;
-    $this->$birthday = $birthday;
-    $this->$joinyear = $joinyear;
-    $this->$fired = $fired;
-    $this->$position = $position;
+    $this->avatar = $avatar;
+    $this->gender = $gender;
+    $this->phone = $phone;
+    $this->birthday = $birthday;
+    $this->address = $address;
   }
 
   public function save()
@@ -50,17 +44,15 @@ class User
       return false;
     }
     $db = new Db();
-    $sql = "INSERT INTO user (name, mail, password, avatar, gender, phone, birthday, joinyear, fired, position) VALUES (
+    $sql = "INSERT INTO user (name, mail, password, avatar, gender, phone, birthday, address) VALUES (
       '" . mysqli_real_escape_string($db->connect(), $this->name) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->mail) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->password) . "',
       '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
-      " . ($this->gender ? 1 : 0) . ",
+      " . intval($this->gender) . ",
       '" . mysqli_real_escape_string($db->connect(), $this->phone) . "',
       '" . mysqli_real_escape_string($db->connect(), $this->birthday) . "',
-      '" . mysqli_real_escape_string($db->connect(), $this->joinyear) . "',
-      " . ($this->fired ? 1 : 0) . ",
-      '" . mysqli_real_escape_string($db->connect(), $this->position) . "'
+      '" . mysqli_real_escape_string($db->connect(), $this->address) . "'
     )";
     $result = $db->query_execute($sql);
     return $result;
@@ -103,26 +95,37 @@ class User
     return $result;
   }
 
-  public static function update_information($oldEmail, $avatar, $name, $newEmail, $address, $phone, $gender, $birthday)
+  public function update_information($id)
   {
-    if ($avatar) {
-      $file_temp = $avatar['tmp_name'];
-      $user_file = $avatar['name'];
-      $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-      $filepath = "./upload/" . $timestamp . $user_file;
-      move_uploaded_file($file_temp, $filepath);
+    $existing_user = $this->get_user_by_ID($id);
+
+    $filepath = '';
+
+    if (!empty($this->avatar['tmp_name']) && is_uploaded_file($this->avatar['tmp_name'])) {
+      // Nếu $this->avatar là một ảnh mới đã được tải lên từ máy khách
+      $unique_filename = uniqid() . '_' . $this->avatar['name'];
+      $filepath = "./upload/documents/" . $unique_filename;
+
+      if (!move_uploaded_file($this->avatar['tmp_name'], $filepath)) {
+        return false;
+      }
+    } else {
+      // Nếu $this->avatar là ảnh cũ
+      $filepath = $existing_user[0]['AVATAR'];
     }
 
     $db = new Db();
-    $sql = "UPDATE user SET mail = '$newEmail', avatar = '$filepath', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
-    if (!$avatar) {
-      $sql = "UPDATE user SET mail = '$newEmail', name = '$name', address = '$address', phone = '$phone', gender = $gender, birthday = '$birthday' WHERE mail = '$oldEmail'";
-    }
+    $sql = "UPDATE user SET 
+            mail = '" . mysqli_real_escape_string($db->connect(), $this->mail) . "',
+            avatar = '" . mysqli_real_escape_string($db->connect(), $filepath) . "',
+            name = '" . mysqli_real_escape_string($db->connect(), $this->name) . "',
+            address = '" . mysqli_real_escape_string($db->connect(), $this->address) . "',
+            gender = $this->gender,
+            birthday = '" . mysqli_real_escape_string($db->connect(), $this->birthday) . "',
+            phone = '" . mysqli_real_escape_string($db->connect(), $this->phone) . "'
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+
     $result = $db->query_execute($sql);
-    if ($result) {
-      return true;
-    } else {
-      return false;
-    }
+    return $result;
   }
 }

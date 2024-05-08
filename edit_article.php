@@ -22,6 +22,10 @@ if (isset($_POST["btnsubmit"])) {
     $originalArticle[0]['TYPE'] = $type;
   }
 
+  if ($content != $originalArticle[0]['CONTENT'] && $content != "") {
+    $originalArticle[0]['CONTENT'] = $content;
+  }
+
   if ($description != $originalArticle[0]['DESCRIPTION']) {
     $originalArticle[0]['DESCRIPTION'] = $description;
   }
@@ -225,11 +229,14 @@ if (isset($_POST["btnsubmit"])) {
             'PasteFromOfficeEnhanced',
             'CaseChange'
           ]
-        }).then(newEditor => {
-          const main = document.getElementById("main");
-          const content = document.getElementById("content");
+        })
+        .then(newEditor => {
           editor = newEditor;
           editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
+          editor.model.document.on('change:data', () => {
+            const main = document.getElementById("main");
+            content.value = editor.getData();
+          });
         })
         .catch(error => {
           console.error(error);
@@ -295,10 +302,16 @@ if (isset($_POST["btnsubmit"])) {
           </div>
         </div>
         <div class="col-md-6">
-          <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
-            <span>Hình hiện tại</span>
-            <img src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail" style="width: 100px; height: 100px; object-fit: cover; margin-top: 20px; margin-left: 12px;">
-          <?php } ?>
+          <span class="">Thumbnail</span>
+          <div class="d-flex justify-content-start" style="margin-top:8px;">
+            <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
+              <img class="col-md-3" style="" src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail" style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
+              <div style="margin-left: 10px; padding-right:30px;" class="col-md-9">
+                <p><?php echo $editingArticle[0]["THUMBNAIL"]; ?></p>
+                <input type="file" name="txtThumbnail" class="form-control" id="file">
+              </div>
+            <?php } ?>
+          </div>
           <div class="invalid-feedback">
             Hãy chọn ảnh mới
           </div>
@@ -310,10 +323,8 @@ if (isset($_POST["btnsubmit"])) {
             Please describe the product.
           </div>
         </div>
-        <div class="col-md-12">
-          <input style="display: none;" type="text" name="txtContent" class="form-control" id="content" required>
-        </div>
-        <input hidden type="text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
+        <input hidden type="text" name="txtContent" class="form-control" id="content">
+        <input hidden type=" text" name="edit-article" value="<?php if (isset($_GET["edit-article"])) {
                                                                 echo $_GET["edit-article"];
                                                               } ?>">
         <div class="col-12 mb-4">

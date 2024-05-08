@@ -1,5 +1,6 @@
 <?php
-include_once ("./entities/article.class.php");
+ob_start();
+include_once("./entities/article.class.php");
 session_start();
 ?>
 
@@ -61,15 +62,15 @@ session_start();
       </ul>
     </div>
     <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" href="main.php">Khoa công nghệ thông tin</a>
+      <a class="blog-header-logo text-dark" href="main.php">Website giảng viên</a>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
       <?php
-      include_once ("./entities/teacher.class.php");
+      include_once("./entities/user.class.php");
       if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
         echo "
           <div class='user-info'>
-            <img class='user-avatar' alt='Avatar' src='" . Teacher::get_teacher($_SESSION["useremail"])[0]["AVATAR"] . "'>
+            <img class='user-avatar' alt='Avatar' src='" . User::get_user($_SESSION["useremail"])[0]["AVATAR"] . "'>
             <span class=\"username\">" . $_SESSION["username"] . "</span>
             <ul class='user-options'>
               <li class='user-item'><a class='navigate-link' href='logout.php'>Đăng xuất</a></li>

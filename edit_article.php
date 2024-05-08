@@ -306,14 +306,14 @@ if (isset($_POST["btnsubmit"])) {
         </div>
         <div class="col-md-6">
           <span class="">Thumbnail</span>
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start" style="margin-top:8px;">
             <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
-              <img class="col-md-3" src="<?= $editingArticle[0]["THUMBNAIL"] ?>"
+              <img class="col-md-3" style="" src="<?= $editingArticle[0]["THUMBNAIL"] ?>"
                 alt="Current Thumbnail"
                 style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
-              <div style="margin-top: 10px; padding-right:30px;">
+              <div style="margin-left: 10px; padding-right:30px;" class="col-md-9">
                 <p><?php echo $editingArticle[0]["THUMBNAIL"]; ?></p>
-                <input type="file" name="newThumbnail" class="form-control col-md-12" id="file">
+                <input type="file" name="txtThumbnail" class="form-control" id="file">
               </div>
             <?php } ?>
           </div>

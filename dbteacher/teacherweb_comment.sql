@@ -16,37 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `teacher`
+-- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `teacher`;
+DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teacher` (
+CREATE TABLE `comment` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  `PASSWORD` varchar(100) DEFAULT NULL,
-  `ADDRESS` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  `AVATAR` varchar(100) DEFAULT NULL,
-  `GENDER` bit(1) DEFAULT NULL,
-  `PHONE` varchar(10) DEFAULT NULL,
-  `MAIL` varchar(50) DEFAULT NULL,
-  `BIRTHDAY` date DEFAULT NULL,
-  `JOINYEAR` date DEFAULT NULL,
-  `FIRED` bit(1) DEFAULT NULL,
-  `POSITION` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `content` longtext NOT NULL,
+  `parentID` int DEFAULT NULL,
+  `userID` int DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  `likeNum` int DEFAULT NULL,
+  `dislikeNum` int DEFAULT NULL,
+  `titleID` int DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `teacher`
+-- Dumping data for table `comment`
 --
 
-LOCK TABLES `teacher` WRITE;
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'Thế Vĩ','123456','283 Lê Văn Lương','url_avatar',_binary '','0123456789','thevi16102004@gmail.com','2004-10-16','2024-04-12',_binary '\0','chức vụ');
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (12,'See you later',11,1,'2024-05-07 00:00:00',0,0,19),(20,'Bonjour',19,1,'2024-05-07 00:00:00',0,0,19),(42,'Hello',-1,1,'2024-05-07 22:59:45',0,0,19),(43,'Hi',42,1,'2024-05-07 22:59:48',0,0,19),(44,'Bonjout',-1,1,'2024-05-07 23:01:54',0,0,2),(45,'Bonjour',44,1,'2024-05-07 23:02:03',0,0,2);
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18  0:54:43
+-- Dump completed on 2024-05-07 23:11:12

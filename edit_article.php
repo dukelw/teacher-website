@@ -324,8 +324,8 @@ if (isset($_POST["btnsubmit"])) {
         </div>
         <div class="col-md-12">
           <label for="description" class="form-label">Mô tả</label>
-          <textarea type="text" name="txtDescription" class="form-control" id="description"  re
-           quired><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
+          <textarea type="text" name="txtDescription" class="form-control" id="description" re
+            quired><?= isset($_GET['edit-article']) ? $editingArticle[0]["DESCRIPTION"] : "" ?></textarea>
           <div class="invalid-feedback">
             Please describe the product.
           </div>

@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/db.class.php");
+require_once("./config/db.class.php");
 ?>
 <?php
 class Doccategory
@@ -10,6 +10,16 @@ class Doccategory
   public function __construct($_name)
   {
     $this->CATENAME = $_name;
+  }
+
+  public function save()
+  {
+    $db = new Db();
+    $sql = "INSERT INTO doccategory (CATENAME) VALUES (
+      '" . mysqli_real_escape_string($db->connect(), $this->CATENAME) . "'
+    )";
+    $result = $db->query_execute($sql);
+    return $result;
   }
 
   public static function list_doccategory()

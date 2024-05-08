@@ -1,5 +1,5 @@
 <?php
-require_once("./config/db.class.php");
+require_once ("./config/db.class.php");
 ?>
 <?php
 class User
@@ -39,7 +39,7 @@ class User
     $file_temp = $this->avatar['tmp_name'];
     $user_file = $this->avatar['name'];
     $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-    $filepath = "./upload/" . $timestamp . $user_file;
+    $filepath = "./upload/avatars/" . $timestamp . $user_file;
     if (move_uploaded_file($file_temp, $filepath) == false) {
       return false;
     }
@@ -104,7 +104,7 @@ class User
     if (!empty($this->avatar['tmp_name']) && is_uploaded_file($this->avatar['tmp_name'])) {
       // Nếu $this->avatar là một ảnh mới đã được tải lên từ máy khách
       $unique_filename = uniqid() . '_' . $this->avatar['name'];
-      $filepath = "./upload/documents/" . $unique_filename;
+      $filepath = "./upload/avatars/" . $unique_filename;
 
       if (!move_uploaded_file($this->avatar['tmp_name'], $filepath)) {
         return false;

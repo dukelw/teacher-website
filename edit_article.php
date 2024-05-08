@@ -237,6 +237,8 @@ if (isset($_POST["btnsubmit"])) {
         const content = document.getElementById("content");
         editor = newEditor;
         editor.setData('<?= $editingArticle[0]["CONTENT"] ?>');
+        main.innerHTML = editor.getData();
+        content.value = editor.getData();
       })
         .catch(error => {
           console.error(error);
@@ -303,11 +305,18 @@ if (isset($_POST["btnsubmit"])) {
           </div>
         </div>
         <div class="col-md-6">
-          <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
-            <span>Hình hiện tại</span>
-            <img src="<?= $editingArticle[0]["THUMBNAIL"] ?>" alt="Current Thumbnail"
-              style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
-          <?php } ?>
+          <span class="">Thumbnail</span>
+          <div class="d-flex justify-content-between align-items-center">
+            <?php if (isset($_GET['edit-article']) && !empty($editingArticle[0]["THUMBNAIL"])) { ?>
+              <img class="col-md-3" src="<?= $editingArticle[0]["THUMBNAIL"] ?>"
+                alt="Current Thumbnail"
+                style="width: 100px; height: 100px; object-fix: cover; margin-top: 20px; margin-left: 12px;">
+              <div style="margin-top: 10px; padding-right:30px;">
+                <p><?php echo $editingArticle[0]["THUMBNAIL"]; ?></p>
+                <input type="file" name="newThumbnail" class="form-control col-md-12" id="file">
+              </div>
+            <?php } ?>
+          </div>
           <div class="invalid-feedback">
             Hãy chọn ảnh mới
           </div>

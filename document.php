@@ -10,7 +10,7 @@ include_once("./entities/major.class.php");
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>File</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
   <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">

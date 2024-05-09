@@ -1,9 +1,9 @@
 <?php
 // Import class Teacher
-require_once("./entities/teacher.class.php");
+require_once ("./entities/teacher.class.php");
 
 // Lấy danh sách giáo viên từ cơ sở dữ liệu
-$teachers = Teacher::list_teacher();
+$teachers = User::list_user();
 ?>
 
 <!doctype html>
@@ -30,7 +30,7 @@ $teachers = Teacher::list_teacher();
 
 <body>
     <div class="container">
-        <?php include_once("./header.php");
+        <?php include_once ("./header.php");
         ?>
 
         <div class="row">
@@ -46,26 +46,27 @@ $teachers = Teacher::list_teacher();
                         <th>Chức vụ</th>
                     </tr>
                     <?php foreach ($teachers as $teacher): ?>
-                    <tr>
-                        <td><img style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;}" src="<?php echo $teacher['AVATAR']; ?>" alt="Ảnh đại diện"></td>
-                        <td><?php echo $teacher['NAME']; ?></td>
-                        <td><?php echo $teacher['MAIL']; ?></td>
-                        <td><?php echo $teacher['GENDER']? 'Nam' : 'Nữ'; ?></td>
-                        <td><?php echo $teacher['PHONE']; ?></td>
-                        <td><?php echo $teacher['POSITION']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
+                        <tr>
+                            <td><img style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;}"
+                                    src="<?php echo $teacher['AVATAR']; ?>" alt="Ảnh đại diện"></td>
+                            <td><?php echo $teacher['NAME']; ?></td>
+                            <td><?php echo $teacher['MAIL']; ?></td>
+                            <td><?php echo $teacher['GENDER'] ? 'Nam' : 'Nữ'; ?></td>
+                            <td><?php echo $teacher['PHONE']; ?></td>
+                            <td><?php echo $teacher['POSITION']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 sidebar sidebar-right theiaStickySidebar">
-                <?php include_once("./introduction-sidebar.php");
+            <div
+                class="col-lg-3 col-md-3 col-sm-12 col-xs-12 sidebar sidebar-right theiaStickySidebar">
+                <?php include_once ("./introduction-sidebar.php");
                 ?>
             </div>
 
-        </div>        
+        </div>
 
-        <?php include_once("./footer.php");
+        <?php include_once ("./footer.php");
         ?>
     </div>
 </body>
-

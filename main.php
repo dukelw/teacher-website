@@ -91,13 +91,15 @@ $fc = fclose($fo);
                         <div class='card' style='width: 100%;'>
                             <a class='card-detail' href='article_detail.php?id=" . $article["ID"] . "'>
                                 <img src=" . $article["THUMBNAIL"] . " class='card-img-top custom-card-image' alt='Article Thumbnail'>
-                                <div class='card-body'>
+                                <div class='card-body d-flex flex-column' style='height: 350px;'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
+                                        <span class='subject'>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
-                                    <h4 class='card-title'> " . $article["TITLE"] . "</h4>
-                                    <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    <div style='flex: 1;' class='card-bottom d-flex flex-column'>
+                                        <h4 style='margin-bottom: auto;' class='card-title'> " . $article["TITLE"] . "</h4>
+                                        <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    </div>
                                 </div>
                                 </div>
                             </a>
@@ -145,13 +147,15 @@ $fc = fclose($fo);
                         <div class='card' style='width: 100%;'>
                             <a class='card-detail' href='article_detail.php?id=" . $article["ID"] . "'>
                                 <img src=" . $article["THUMBNAIL"] . " class='card-img-top custom-card-image' alt='Article Thumbnail'>
-                                <div class='card-body'>
+                                <div class='card-body d-flex flex-column' style='height: 350px;'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
+                                        <span class='subject'>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
-                                    <h4 class='card-title'> " . $article["TITLE"] . "</h4>
-                                    <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    <div style='flex: 1;' class='card-bottom d-flex flex-column'>
+                                        <h4 style='margin-bottom: auto;' class='card-title'> " . $article["TITLE"] . "</h4>
+                                        <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    </div>
                                 </div>
                                 </div>
                             </a>

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: teacherweb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `notification`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notification` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `ARTICLE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `ARTICLE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `CONTENT` longtext,
   `SENDTO` int DEFAULT NULL,
-  `SENDFROM` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `SENDFROM` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `SENDTO` (`SENDTO`),
   CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`SENDTO`) REFERENCES `teacher` (`ID`)
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18  0:54:43
+-- Dump completed on 2024-05-07 23:21:03

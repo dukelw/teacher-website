@@ -1,7 +1,16 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+  integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+  crossorigin="anonymous"></script>
 <link href="./assets/css/blog.css" rel="stylesheet">
 <title>Teacher Website</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
@@ -14,7 +23,7 @@
 <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
 <?php
 echo "<div class='container'>";
-include_once("./entities/user.class.php");
+include_once ("./entities/user.class.php");
 session_start();
 echo "</div>";
 
@@ -29,6 +38,9 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
   $year = $_POST["birthdayYear"];
   $birthday = $year . "-" . $month . "-" . $day;
   $user = User::get_user_by_ID($_SESSION['userID']);
+  $file = $_FILES['thumbnail'];
+
+  $avatar = (!empty($file['tmp_name'])) ? $file : $user[0]["AVATAR"];
 
   if ($name != $user[0]['NAME']) {
     $user[0]['NAME'] = $name;
@@ -54,7 +66,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
     $user[0]['NAME'],
     $user[0]['MAIL'],
     $user[0]['PASSWORD'],
-    $user[0]['AVATAR'],
+    $avatar,
     $user[0]['GENDER'],
     $user[0]['PHONE'],
     $user[0]['BIRTHDAY'],
@@ -72,18 +84,27 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
 }
 ?>
 
-<form enctype="multipart/form-data" action="update_info.php" method="POST" class="container rounded bg-white mt-5 mb-5">
+<form enctype="multipart/form-data" action="update_info.php" method="POST"
+  class="container rounded bg-white mt-5 mb-5">
   <div class="row">
     <div class="col-md-3 border-right">
-      <div style="padding-bottom: 12px !important;" class="d-flex flex-column align-items-center text-center py-5"><img class="user-avatar-big rounded-circle" src="<?= User::get_user($_SESSION['useremail'])[0]["AVATAR"] ?>"> <span class="font-weight-bold"><?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?></span><span class="text-black-50"><?= User::get_user($_SESSION['useremail'])[0]["MAIL"] ?></span><span>
+      <div style="padding-bottom: 12px !important;"
+        class="d-flex flex-column align-items-center text-center py-5"><img
+          class="user-avatar-big rounded-circle avatar"
+          src="<?= User::get_user($_SESSION['useremail'])[0]["AVATAR"] ?>"> <span
+          class="font-weight-bold"><?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?></span><span
+          class="text-black-50"><?= User::get_user($_SESSION['useremail'])[0]["MAIL"] ?></span><span>
         </span></div>
       <div class="col-md-12">
         <label for="thumbnail" class="form-label">Đổi hình nền</label>
-        <input disabled type="file" accept=".PNG, .GIF, .JPG" name="thumbnail" class="form-control" id="thumbnail">
+        <input disabled type="file" accept=".PNG, .GIF, .JPG" name="thumbnail" class="form-control"
+          id="thumbnail">
       </div>
-      <div style="visibility: hidden;" class="col-md-12 d-flex flex-column align-items-center thumbnail-wrapper">
+      <div style="visibility: hidden;"
+        class="col-md-12 d-flex flex-column align-items-center thumbnail-wrapper">
         <h4 class="mt-4">Ảnh xem trước</h4>
-        <img id="preview" class="user-avatar-big rounded-circle" src="<?= User::get_user($_SESSION['useremail'])[0]["AVATAR"] ?>">
+        <img id="preview" class="user-avatar-big rounded-circle"
+          src="<?= User::get_user($_SESSION['useremail'])[0]["AVATAR"] ?>">
       </div>
     </div>
     <div class="col-md-9 border-right">
@@ -93,10 +114,18 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
           <button class="btn btn-primary edit-btn" type="button">Chỉnh sửa</button>
         </div>
         <div class="row mt-3">
-          <div class="col-md-12"><label class="labels">Tên</label><input disabled type="text" name="name" class="form-control" value="<?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?>"></div>
-          <div class="col-md-12"><label class="labels">Email</label><input disabled type="text" name="email" class="form-control" value="<?= User::get_user($_SESSION['useremail'])[0]["MAIL"] ?>"></div>
-          <div class="col-md-12"><label class="labels">Số điện thoại</label><input disabled type="text" name="phone" class="form-control" value="<?= User::get_user($_SESSION['useremail'])[0]["PHONE"] ?>"></div>
-          <div class="col-md-12"><label class="labels">Địa chỉ</label><input disabled type="text" name="address" class="form-control" value="<?= User::get_user($_SESSION['useremail'])[0]["ADDRESS"] ?>"></div>
+          <div class="col-md-12"><label class="labels">Tên</label><input disabled type="text"
+              name="name" class="form-control"
+              value="<?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?>"></div>
+          <div class="col-md-12"><label class="labels">Email</label><input disabled type="text"
+              name="email" class="form-control"
+              value="<?= User::get_user($_SESSION['useremail'])[0]["MAIL"] ?>"></div>
+          <div class="col-md-12"><label class="labels">Số điện thoại</label><input disabled
+              type="text" name="phone" class="form-control"
+              value="<?= User::get_user($_SESSION['useremail'])[0]["PHONE"] ?>"></div>
+          <div class="col-md-12"><label class="labels">Địa chỉ</label><input disabled type="text"
+              name="address" class="form-control"
+              value="<?= User::get_user($_SESSION['useremail'])[0]["ADDRESS"] ?>"></div>
           <div class="col-md-12">
             <label class="labels">Giới tính</label>
             <select name="gender" disabled type="text" class="form-control">
@@ -169,13 +198,14 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
             </div>
           </div>
         </div>
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button save-btn" name="btnsubmit" type="submit" disabled>Lưu thay đổi</button></div>
+        <div class="mt-5 text-center"><button class="btn btn-primary profile-button save-btn"
+            name="btnsubmit" type="submit" disabled>Lưu thay đổi</button></div>
       </div>
     </div>
   </div>
 </form>
 <?php
-include_once("footer.php");
+include_once ("footer.php");
 ?>
 <script>
   const editBtn = document.querySelector('.edit-btn');
@@ -189,7 +219,7 @@ include_once("footer.php");
   const birthdayDay = document.querySelector('select[name="birthdayDay"]');
   const birthdayMonth = document.querySelector('select[name="birthdayMonth"]');
   const birthdayYear = document.querySelector('select[name="birthdayYear"]');
-  editBtn.onclick = function() {
+  editBtn.onclick = function () {
     const isDisabled = name.disabled;
     saveBtn.disabled = !isDisabled;
     name.disabled = !isDisabled;
@@ -217,10 +247,10 @@ include_once("footer.php");
   const thumbnailInput = document.querySelector('#thumbnail');
   const previewImg = document.querySelector('#preview');
 
-  thumbnailInput.addEventListener('change', function() {
+  thumbnailInput.addEventListener('change', function () {
     if (thumbnailInput.files && thumbnailInput.files[0]) {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         previewImg.src = e.target.result;
       };
 

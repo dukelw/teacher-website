@@ -24,14 +24,12 @@
 <?php
 echo "<div class='container'>";
 include_once ("./entities/user.class.php");
-// include_once("./header.php");
 session_start();
 echo "</div>";
 
 if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbnail"])) {
   $name = $_POST["name"];
   $thumbnail = $_FILES["thumbnail"];
-  $email = $_POST["email"];
   $address = $_POST["address"];
   $phone = $_POST["phone"];
   $gender = intval($_POST["gender"]);
@@ -39,7 +37,45 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
   $month = $_POST["birthdayMonth"];
   $year = $_POST["birthdayYear"];
   $birthday = $year . "-" . $month . "-" . $day;
-  $result = User::update_information($_SESSION["useremail"], $thumbnail, $name, $email, $address, $phone, $gender, $birthday);
+  $user = User::get_user_by_ID($_SESSION['userID']);
+  $file = $_FILES['thumbnail'];
+
+  $avatar = (!empty($file['tmp_name'])) ? $file : $user[0]["AVATAR"];
+
+  if ($name != $user[0]['NAME']) {
+    $user[0]['NAME'] = $name;
+  }
+
+  if ($address != $user[0]['ADDRESS']) {
+    $user[0]['ADDRESS'] = $address;
+  }
+
+  if ($phone != $user[0]['PHONE']) {
+    $user[0]['PHONE'] = $phone;
+  }
+
+  if ($gender != $user[0]['GENDER']) {
+    $user[0]['GENDER'] = $gender;
+  }
+
+  if ($birthday != $user[0]['BIRTHDAY']) {
+    $user[0]['BIRTHDAY'] = $birthday;
+  }
+
+  $newUser = new User(
+    $user[0]['NAME'],
+    $user[0]['MAIL'],
+    $user[0]['PASSWORD'],
+    $avatar,
+    $user[0]['GENDER'],
+    $user[0]['PHONE'],
+    $user[0]['BIRTHDAY'],
+    $user[0]['ADDRESS'],
+  );
+
+  $result = $newUser->update_information($_SESSION['userID']);
+
+
   if ($result) {
     header("Location main.php");
   } else {
@@ -54,7 +90,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
     <div class="col-md-3 border-right">
       <div style="padding-bottom: 12px !important;"
         class="d-flex flex-column align-items-center text-center py-5"><img
-          class="user-avatar-big rounded-circle"
+          class="user-avatar-big rounded-circle avatar"
           src="<?= User::get_user($_SESSION['useremail'])[0]["AVATAR"] ?>"> <span
           class="font-weight-bold"><?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?></span><span
           class="text-black-50"><?= User::get_user($_SESSION['useremail'])[0]["MAIL"] ?></span><span>
@@ -161,67 +197,6 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <label class="labels">Ngày vào làm</label>
-            <div class="row">
-              <div class="col">
-                <select disabled name="joinDay" class="form-control">
-                  <?php
-                  $selectedDay = date('d', strtotime(User::get_user($_SESSION['useremail'])[0]["JOINYEAR"]));
-                  for ($day = 1; $day <= 31; $day++) {
-                    echo '<option value="' . $day . '"';
-                    if ($day == $selectedDay)
-                      echo ' selected';
-                    echo '>' . $day . '</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="col">
-                <select disabled name="joinMonth" class="form-control">
-                  <?php
-                  $selectedMonth = date('m', strtotime(User::get_user($_SESSION['useremail'])[0]["JOINYEAR"]));
-                  $months = [
-                    '01' => 'Tháng 1',
-                    '02' => 'Tháng 2',
-                    '03' => 'Tháng 3',
-                    '04' => 'Tháng 4',
-                    '05' => 'Tháng 5',
-                    '06' => 'Tháng 6',
-                    '07' => 'Tháng 7',
-                    '08' => 'Tháng 8',
-                    '09' => 'Tháng 9',
-                    '10' => 'Tháng 10',
-                    '11' => 'Tháng 11',
-                    '12' => 'Tháng 12',
-                  ];
-                  foreach ($months as $key => $month) {
-                    echo '<option value="' . $key . '"';
-                    if ($key == $selectedMonth)
-                      echo ' selected';
-                    echo '>' . $month . '</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="col">
-                <select disabled name="joinYear" class="form-control">
-                  <?php
-                  $currentYear = date('Y');
-                  $startYear = $currentYear - 100;
-                  $endYear = $currentYear;
-                  $selectedYear = date('Y', strtotime(User::get_user($_SESSION['useremail'])[0]["JOINYEAR"]));
-                  for ($year = $endYear; $year >= $startYear; $year--) {
-                    echo '<option value="' . $year . '"';
-                    if ($year == $selectedYear)
-                      echo ' selected';
-                    echo '>' . $year . '</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="mt-5 text-center"><button class="btn btn-primary profile-button save-btn"
             name="btnsubmit" type="submit" disabled>Lưu thay đổi</button></div>
@@ -249,7 +224,6 @@ include_once ("footer.php");
     saveBtn.disabled = !isDisabled;
     name.disabled = !isDisabled;
     thumbnail.disabled = !isDisabled;
-    email.disabled = !isDisabled;
     phone.disabled = !isDisabled;
     address.disabled = !isDisabled;
     gender.disabled = !isDisabled;

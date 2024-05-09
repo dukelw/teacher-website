@@ -16,34 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `document`
 --
 
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `document`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
+CREATE TABLE `document` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `gender` tinyint(1) DEFAULT '0',
-  `phone` varchar(10) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `password` varchar(100) NOT NULL,
-  `avatar` varchar(100) NOT NULL,
-  `joinyear` date DEFAULT NULL,
-  `fired` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `TITLE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `DESCRIPTION` longtext NOT NULL,
+  `PUBLISH` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cateID` int NOT NULL,
+  `docfile` varchar(200) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DOC_Cate` (`cateID`),
+  CONSTRAINT `FK_DOC_Cate` FOREIGN KEY (`cateID`) REFERENCES `doccategory` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `document`
 --
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+LOCK TABLES `document` WRITE;
+/*!40000 ALTER TABLE `document` DISABLE KEYS */;
+INSERT INTO `document` VALUES (10,'Báo cáo cuối kì web!','oke rồi đó.','2024-05-07 00:00:00',1,'./upload/documents/6639c3674fc96_GK2023-2024.pdf');
+/*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

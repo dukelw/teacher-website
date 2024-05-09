@@ -1,8 +1,8 @@
 <?php
-include_once("./entities/document.class.php");
-include_once("./entities/doccategory.class.php");
-include_once("./entities/major.class.php");
-include_once("./dashboardheader.php");
+include_once ("./entities/document.class.php");
+include_once ("./entities/doccategory.class.php");
+include_once ("./entities/major.class.php");
+include_once ("./dashboardheader.php");
 ?>
 
 <?php
@@ -44,7 +44,10 @@ if (isset($_POST["btnsubmit"])) {
 <head>
   <meta charset="utf-8">
   <title>Cập nhật tài liệu</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
@@ -57,12 +60,13 @@ if (isset($_POST["btnsubmit"])) {
 <body>
   <div class="main container" style="margin-top: 100px;">
     <h1>Cập nhật tài liệu</h1>
-    <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="" novalidate>
+    <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action=""
+      novalidate>
       <div class="col-md-6">
         <label for="name" class="form-label">Tiêu đề</label>
         <input type="text" name="txtName" class="form-control" id="name" required value="<?php if (isset($_GET['edit-document'])) {
-                                                                                            echo $editingDocument[0]["TITLE"];
-                                                                                          } ?>">
+          echo $editingDocument[0]["TITLE"];
+        } ?>">
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -116,16 +120,17 @@ if (isset($_POST["btnsubmit"])) {
       </div>
       <div class="col-md-12">
         <label for="description" class="form-label">Mô tả</label>
-        <textarea type="text" name="txtDescription" class="form-control" id="description" required><?php if (isset($_GET['edit-document'])) {
-                                                                                                      echo $editingDocument[0]["DESCRIPTION"];
-                                                                                                    } ?></textarea>
+        <textarea type="text" name="txtDescription" class="form-control" id="description"
+          required><?php if (isset($_GET['edit-document'])) {
+            echo $editingDocument[0]["DESCRIPTION"];
+          } ?></textarea>
         <div class="invalid-feedback">
           Please describe the document.
         </div>
       </div>
       <input hidden type="text" name="edit-document" value="<?php if (isset($_GET["edit-document"])) {
-                                                              echo $_GET["edit-document"];
-                                                            } ?>">
+        echo $_GET["edit-document"];
+      } ?>">
       <div class="col-12 mb-4">
         <button class="btn btn-primary" name="btnsubmit" type="submit">Cập nhật tài liệu</button>
       </div>

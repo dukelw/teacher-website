@@ -1,5 +1,5 @@
 <?php
-require_once("./config/db.class.php");
+require_once ("./config/db.class.php");
 ?>
 <?php
 class Article
@@ -41,7 +41,7 @@ class Article
     $file_temp = $this->thumbnail['tmp_name'];
     $user_file = $this->thumbnail['name'];
     $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-    $filepath = "./upload/" . $timestamp . $user_file;
+    $filepath = "./upload/article-thumbnails/" . $timestamp . $user_file;
     if (move_uploaded_file($file_temp, $filepath) == false) {
       return false;
     }
@@ -186,12 +186,34 @@ class Article
   public function update($id)
   {
     $db = new Db();
+
+    $existing_article = $this->get_article($id);
+
+    // Initialize $filepath
+    $filepath = '';
+
+    // Check if a new file is uploaded
+    if (!empty($this->thumbnail['tmp_name'])) {
+      // Generate a unique file name
+      $unique_filename = uniqid() . '_' . $this->thumbnail['name'];
+      $filepath = "./upload/article-thumbnails/" . $unique_filename;
+
+      // Move the uploaded file to the destination directory
+      if (!move_uploaded_file($this->thumbnail['tmp_name'], $filepath)) {
+        // Handle file upload error (e.g., log error or show user message)
+        return false;
+      }
+    } else {
+      // If no new file uploaded, use the existing file path
+      $filepath = $existing_article[0]['THUMBNAIL'];
+    }
     $sql = "UPDATE article SET 
             title = '" . mysqli_real_escape_string($db->connect(), $this->title) . "',
             type = '" . mysqli_real_escape_string($db->connect(), $this->type) . "',
             content = '" . mysqli_real_escape_string($db->connect(), $this->content) . "',
             description = '" . mysqli_real_escape_string($db->connect(), $this->description) . "',
-            isNoti = '" . mysqli_real_escape_string($db->connect(), $this->noti) . "'
+            isNoti = '" . mysqli_real_escape_string($db->connect(), $this->noti) . "',
+            thumbnail = '" . mysqli_real_escape_string($db->connect(), $filepath) . "'
             WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
 
     $result = $db->query_execute($sql);
@@ -205,5 +227,18 @@ class Article
             WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
     $result = $db->query_execute($sql);
     return $result;
+  }
+
+  public static function to_string($article)
+  {
+    echo "TITLE: " . $article->title;
+    echo "TYPE: " . $article->type;
+    echo "CONTENT: " . $article->content;
+    echo "PUBLISH: " . $article->publish;
+    echo "AUTHOR: " . $article->author;
+    echo "AID: " . $article->aid;
+    echo "THUMBNAIL: " . $article->thumbnail;
+    echo "DESCRIPTION: " . $article->description;
+    echo "NOTI: " . $article->noti;
   }
 }

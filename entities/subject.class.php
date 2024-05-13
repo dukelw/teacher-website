@@ -12,6 +12,16 @@ class Subject
     $this->name = $_name;
   }
 
+  public function save()
+  {
+    $db = new Db();
+    $sql = "INSERT INTO subject (name) VALUES (
+      '" . mysqli_real_escape_string($db->connect(), $this->name) . "'
+    )";
+    $result = $db->query_execute($sql);
+    return $result;
+  }
+
   public static function list_subject()
   {
     $db = new Db();

@@ -1,0 +1,30 @@
+.infor-container {
+  display: flex;
+  align-items: center;
+}
+
+.article-item {
+  text-decoration: none;
+  color: black;
+}
+
+.article-item:hover {
+  text-decoration: none;
+  color: #b30021;
+}
+
+.add-article-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  padding: 8px 10px;
+  text-decoration: none;
+  border-radius: 20px;
+  background-color: #3C91E6;
+  color: white;
+}
+
+.add-article-btn:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}

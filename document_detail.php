@@ -1,5 +1,5 @@
 <?php
-include_once ("./entities/document.class.php");
+include_once("./entities/document.class.php");
 
 if (!isset($_GET["id"])) {
   header("Location: notfound.php");
@@ -40,14 +40,14 @@ if (!$document) {
 
 <body>
   <div class="container">
-    <?php include_once ("./header.php"); ?>
+    <?php include_once("./header.php"); ?>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-12 document-detail">
-          <?php if (isset($document)): ?>
+          <?php if (isset($document)) : ?>
             <div class="document-info col-md-3">
               <h5 class="">
                 <?php echo isset($document["TITLE"]) ? $document["TITLE"] : "Không có tiêu đề"; ?>
@@ -61,13 +61,13 @@ if (!$document) {
             </div>
 
             <div class="document-file col-md-9">
-              <?php if (isset($document)): ?>
+              <?php if (isset($document)) : ?>
                 <?php
                 $file_path = $document["docfile"];
                 $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
                 ?>
 
-                <?php if ($file_extension === 'pdf'): ?>
+                <?php if ($file_extension === 'pdf') : ?>
                   <canvas id="pdfViewer" style="border: 1px solid black;"></canvas>
                   <button id="prevPage">Trang trước</button>
                   <button id="nextPage">Trang kế tiếp</button>
@@ -80,14 +80,16 @@ if (!$document) {
                     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.min.js';
 
                     var loadingTask = pdfjsLib.getDocument(url);
-                    loadingTask.promise.then(function (pdf) {
+                    loadingTask.promise.then(function(pdf) {
                       var canvas = document.getElementById('pdfViewer');
                       var ctx = canvas.getContext('2d');
                       var currentPage = 1;
 
                       function renderPage(num) {
-                        pdf.getPage(num).then(function (page) {
-                          var viewport = page.getViewport({ scale: 1.25 });
+                        pdf.getPage(num).then(function(page) {
+                          var viewport = page.getViewport({
+                            scale: 1.25
+                          });
                           canvas.height = viewport.height;
                           canvas.width = viewport.width;
                           var renderContext = {
@@ -100,14 +102,14 @@ if (!$document) {
 
                       renderPage(currentPage);
 
-                      document.getElementById('prevPage').addEventListener('click', function () {
+                      document.getElementById('prevPage').addEventListener('click', function() {
                         if (currentPage > 1) {
                           currentPage--;
                           renderPage(currentPage);
                         }
                       });
 
-                      document.getElementById('nextPage').addEventListener('click', function () {
+                      document.getElementById('nextPage').addEventListener('click', function() {
                         if (currentPage < pdf.numPages) {
                           currentPage++;
                           renderPage(currentPage);
@@ -115,20 +117,19 @@ if (!$document) {
                       });
                     });
                   </script>
-                <?php else: ?>
-                  <embed src="<?php echo $file_path; ?>" type="application/<?php echo $file_extension; ?>"
-                    width="100%" height="600px" />
+                <?php else : ?>
+                  <embed src="<?php echo $file_path; ?>" type="application/<?php echo $file_extension; ?>" width="100%" height="600px" />
                   <a href="<?php echo $file_path; ?>" download>
                     <button>Tải tài liệu</button>
                   </a>
                 <?php endif; ?>
 
-              <?php else: ?>
+              <?php else : ?>
                 <p>Không tìm thấy tài liệu.</p>
               <?php endif; ?>
             </div>
 
-          <?php else: ?>
+          <?php else : ?>
             <p>Không tìm thấy tài liệu.</p>
           <?php endif; ?>
         </div>
@@ -136,7 +137,7 @@ if (!$document) {
     </div>
   </div>
 
-  <?php include_once ("./footer.php") ?>
+  <?php include_once("./footer.php") ?>
 </body>
 
 </html>

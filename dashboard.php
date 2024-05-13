@@ -4,16 +4,6 @@ include_once('./entities/document.class.php');
 include_once('./entities/subject.class.php');
 include_once('./entities/user.class.php');
 
-// Example
-session_start();
-$email = 'dzoanthanh@gmail.com';
-$user = User::get_admin_by_email($email);
-$_SESSION['userID'] = $user[0]['ID'];
-$_SESSION['username'] = $user[0]["NAME"];
-$_SESSION['useremail'] = $user[0]["MAIL"];
-$_SESSION['userthumb'] = $user[0]['AVATAR'];
-//
-
 if (isset($_POST["delete-article"])) {
   $delete_id = $_POST["delete-article"];
   $result = Article::delete($delete_id);
@@ -93,7 +83,7 @@ if (isset($_POST["delete-user"])) {
         </a>
       </li>
       <li>
-        <a href="signin.php" class="logout">
+        <a href="logout.php" class="logout">
           <i class='bx bxs-log-out-circle'></i>
           <span class="text">Đăng xuất</span>
         </a>

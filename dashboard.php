@@ -283,7 +283,3 @@ if (isset($_POST["delete-user"])) {
     }
   </script>
 </body>
-
-.status.job {
-background-color: #6fcaea;
-}

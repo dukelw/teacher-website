@@ -44,7 +44,6 @@ if (isset($_POST["btncategorysubmit"])) {
     echo "Thêm thất bại";
   }
 }
-
 ?>
 
 <!DOCTYPE html>

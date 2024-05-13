@@ -283,5 +283,3 @@ if (isset($_POST["delete-user"])) {
     }
   </script>
 </body>
-
-</html>

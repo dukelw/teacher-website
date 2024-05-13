@@ -93,7 +93,7 @@ a {
 
 .card-text {
   color: #212529;
-  height: 76px;
+  height: 72px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

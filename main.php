@@ -52,7 +52,7 @@ $fc = fclose($fo);
                             <a class='text-dark feature-title' href='#'>" . $featureone["TITLE"] . ".</a>
                         </h3>
                         <div class='mb-1 text-muted'>" . $featureone["PUBLISH"] . "</div>
-                        <p class='card-text mb-auto feature-description'>" . $featureone["DESCRIPTION"] . "</p>
+                        <p class='mb-auto feature-description'>" . $featureone["DESCRIPTION"] . "</p>
                         <a href='article_detail.php?id=" . $featureone["ID"] . "'>Tiếp tục đọc</a>
                     </div>
                     <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featureone["THUMBNAIL"] . "' alt='Card image cap'>
@@ -66,7 +66,7 @@ $fc = fclose($fo);
                             <a class='text-dark feature-title' href='#'>" . $featuretwo["TITLE"] . ".</a>
                         </h3>
                         <div class='mb-1 text-muted'>" . $featuretwo["PUBLISH"] . "</div>
-                        <p class='card-text mb-auto feature-description'>" . $featuretwo["DESCRIPTION"] . "</p>
+                        <p class='mb-auto feature-description'>" . $featuretwo["DESCRIPTION"] . "</p>
                         <a href='article_detail.php?id=" . $featuretwo["ID"] . "'>Tiếp tục đọc</a>
                     </div>
                     <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featuretwo["THUMBNAIL"] . "' alt='Card image cap'>

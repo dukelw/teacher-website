@@ -26,34 +26,7 @@ session_start();
           <input type="text" hidden name="keysearch">
         </form>
       </div>
-      <ul class='search-results'>
-        <?php
-        $articlesPerPage = 6;
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-        $start = ($page - 1) * $articlesPerPage;
-        if (isset($_GET['keysearch']) && $_GET['keysearch'] != '') {
-          $keySearch = $_GET['keysearch'];
-          $foundArticles = Article::list_articles_by_keyword($keySearch, $start, $articlesPerPage);
-          echo "<li class='text-right close-btn'> &times </li>";
-          if (count($foundArticles) != 0) {
-            foreach ($foundArticles as $foundArticle) {
-              echo
-              "<li class=''>
-                  <div class='d-flex justify-content-between align-items-center'>
-                    <img class='news-image' src='" . $foundArticle["THUMBNAIL"] . "' alt='Thumbnail'/>
-                    <p>
-                      <a href='article_detail.php?id=" . $foundArticle["ID"] . "' class='notification-title'> " . $foundArticle["TITLE"] . "</a>
-                      <span class='publish-day'>" . $foundArticle["PUBLISH"] . "</span>
-                    </p>
-                  </div>
-                </li>";
-            }
-          } else {
-            echo "<li>Không có bài báo nào được tìm thấy</li>";
-          }
-        }
-        ?>
+      <ul class='search-results hide'>
       </ul>
     </div>
     <div class="col-4 text-center">
@@ -94,50 +67,99 @@ session_start();
 </div>
 
 <script>
-  const user = document.querySelector(".user-info")
+  const searchToggle = document.querySelector('.search-toggle');
+  const searchWrapper = document.querySelector('.search-wrapper');
+  const searchBox = document.querySelector('.search-box');
+  const searchIcon = document.querySelector('.search-icon');
+  const searchResults = document.querySelector('.search-results');
+  const hiddenInput = document.querySelector('input[name="keysearch"]');
+  const closeBtn = document.querySelector('.close-btn');
 
-  user.onmouseenter = () => {
-    const optionsForm = document.querySelector('.user-options')
-    optionsForm.classList.add('active')
-  }
-
-  user.onmouseleave = () => {
-    const optionsForm = document.querySelector('.user-options')
-    optionsForm.classList.remove('active')
-  }
-
-  const searchToggle = document.querySelector('.search-toggle')
-  const searchWrapper = document.querySelector('.search-wrapper')
-  const searchBox = document.querySelector('.search-box')
-  const searchIcon = document.querySelector('.search-icon')
-  const hiddenInput = document.querySelector('input[name="keysearch"]')
-  const closeBtn = document.querySelector('.close-btn')
   searchToggle.onclick = function(event) {
     searchWrapper.classList.add('active-flex');
-    searchToggle.classList.add('hide')
-    searchBox.focus()
+    searchToggle.classList.add('hide');
+    searchBox.focus();
   }
 
-  searchIcon.onclick = function(event) {
-    var keySearch = searchBox.value.trim()
-    hiddenInput.value = keySearch
-    searchWrapper.submit();
+  searchBox.oninput = function(event) {
+    performSearch();
   }
 
   searchBox.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      var keySearch = searchBox.value.trim();
-      hiddenInput.value = keySearch;
-      searchWrapper.submit();
+      performSearch();
     }
   });
 
-
   if (closeBtn != null) {
     closeBtn.onclick = function(event) {
-      hiddenInput.value = ''
-      searchWrapper.submit();
+      hiddenInput.value = '';
+      searchResults.innerHTML = '';
+      searchWrapper.classList.remove('active-flex');
+      searchToggle.classList.remove('hide');
     }
+  }
+
+  function performSearch() {
+    searchResults.classList.remove('hide')
+    const keySearch = searchBox.value.trim();
+    if (keySearch !== '') {
+      hiddenInput.value = keySearch;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'search_articles.api.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const articles = JSON.parse(xhr.responseText);
+          displayResults(articles);
+        }
+      };
+
+      xhr.send(`keysearch=${keySearch}`);
+    }
+  }
+
+  function displayResults(articles) {
+    searchResults.innerHTML = "<li class='text-right close-btn'> &times </li>";
+    if (articles.length > 0) {
+      articles.forEach(article => {
+        searchResults.innerHTML += `
+                <li class=''>
+                    <div class='d-flex justify-content-between align-items-center'>
+                        <img class='news-image' src='${article.THUMBNAIL}' alt='Thumbnail'/>
+                        <p>
+                            <a href='article_detail.php?id=${article.ID}' class='notification-title'>${article.TITLE}</a>
+                            <span class='publish-day'>${article.PUBLISH}</span>
+                        </p>
+                    </div>
+                </li>`;
+      });
+    } else {
+      searchResults.innerHTML += "<li>Không có bài báo nào được tìm thấy</li>";
+    }
+
+    document.querySelector('.close-btn').onclick = function(event) {
+      hiddenInput.value = '';
+      searchResults.innerHTML = '';
+      searchResults.classList.add = 'hide';
+      searchWrapper.classList.remove('active-flex');
+      searchToggle.classList.remove('hide');
+    };
+  }
+
+  const user = document.querySelector(".user-info");
+
+  if (user) {
+    user.onmouseenter = () => {
+      const optionsForm = document.querySelector('.user-options');
+      optionsForm.classList.add('active');
+    };
+
+    user.onmouseleave = () => {
+      const optionsForm = document.querySelector('.user-options');
+      optionsForm.classList.remove('active');
+    };
   }
 </script>

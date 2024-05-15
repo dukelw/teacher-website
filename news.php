@@ -21,9 +21,11 @@ include_once("./entities/subject.class.php");
   <link href="./css/article_detail.css" rel="stylesheet">
   <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="./css/news.css">
+  <link rel="stylesheet" href="./css/darkmode.css">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 </head>
 
 <body>
@@ -152,6 +154,7 @@ include_once("./entities/subject.class.php");
       text: 'Thumbnail'
     });
   </script>
+  <script src="./js/darkmode.js"></script>
 </body>
 
 </html>

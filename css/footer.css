@@ -1,65 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300&family=Rubik:wght@400;500;700&display=swap");
+
+.newsletter_title {
+  font-family: "Noto Serif Display", serif;
+  font-size: 2.3rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.c-link {
+  text-decoration: none !important;
+  color: var(--dark);
+  transition: 0.3s ease-in;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 0.5rem;
+  display: inline-flex;
+}
+
+.c-link:hover {
+  color: var(--dark);
+  opacity: 0.8;
+  border-bottom: 1px solid var(--dark);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.send-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+}
+
+.flex {
+  display: flex;
+}
+
+.footer_inner {
+  border-radius: 5px;
+  padding: 2rem;
+  margin: 1rem 0;
+}
+
 .footer {
-  background-color: hsl(211, 96%, 33%);
-  color: white !important;
-  font-size: 14px !important;
-  line-height: 22px;
-  font-family: "Roboto", Helvetica, Arial, sans-serif !important;
-  line-height: 28px !important;
-}
-
-.footer .container {
-  padding: 40px 0;
   display: flex;
-  justify-content: space-between !important;
+  align-items: center;
 }
 
-.footer-item {
-  width: 50%;
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.footer-first {
+.message-form {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--dark);
 }
 
-.footer .container a {
-  text-transform: uppercase;
-  color: #fff !important;
-  font-size: 16px !important;
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.footer .container a:hover {
-  text-decoration: none;
-  color: red !important;
+.message {
+  padding: 0.75rem 0;
+  border: none;
+  background: none;
+  font-weight: 500;
+  transition: border 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  border-radius: 0;
+  width: 100%;
+  font-size: 1.05rem;
+  font-weight: bolder;
+}
+
+.message:focus {
+  outline: none;
+}
+
+.message::placeholder {
+  color: var(--dark);
+  font-weight: 400;
+}
+
+svg {
+  margin: 0.5rem;
+}
+
+svg:hover {
+  opacity: 0.7;
   cursor: pointer;
 }
 
-.footer-second:hover div div {
-  color: red !important;
+.c-2 {
+  margin-top: 3.5rem;
 }
 
-.block-title {
-  font-family: "Nunito", sans-serif !important;
-  font-size: 22.05px;
-  padding: 10px 0 10px;
-  font-weight: 700;
-}
-
-.footer-copyright {
-  background-color: #031634;
-  font-size: 14px;
-  color: white !important;
-  padding: 14px !important;
-  display: flex;
-  justify-content: center;
+.footer_copyright {
+  color: var(--dark);
   text-align: center;
-  flex-direction: column;
 }
 
-.footer-copyright a {
-  color: white !important;
-}
-
-.footer-copyright p {
-  margin-bottom: 0;
-}

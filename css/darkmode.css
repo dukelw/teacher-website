@@ -33,4 +33,10 @@ body.darkmode--activated .card-text,
 body.darkmode--activated .socials svg {
   color: #ffffff !important;
 }
+body.darkmode--activated .comment__card p,
+body.darkmode--activated .comment__card .time,
+body.darkmode--activated .comment__card .action,
+body.darkmode--activated .comment__title {
+  color: black !important;
+}
 

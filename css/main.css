@@ -2,6 +2,9 @@
   color: #28A745 !important;
 }
 
+a {
+  text-decoration: none !important;
+}
 
 .feature-description,
 .feature-title {
@@ -62,7 +65,7 @@
 }
 
 .custom-card-image {
-  min-height: 150px;
+  height: 150px;
   object-fit: cover;
 }
 
@@ -90,4 +93,18 @@
 
 .card-text {
   color: #212529;
+  height: 76px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.subject {
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
 }

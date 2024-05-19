@@ -1,6 +1,7 @@
 <?php
 include_once("./entities/subject.class.php");
 include_once("./entities/article.class.php");
+include_once("./dashboardheader.php");
 if (isset($_POST["btnsubmit"])) {
   $title = $_POST["txtName"];
   $type = intval($_POST["txtCategory"]);
@@ -16,11 +17,9 @@ if (isset($_POST["btnsubmit"])) {
   $newArticle = new Article($title, $type, $content, $publish, $author, $aid, $picture, $description, $noti);
   $result = $newArticle->save();
   if ($result) {
-    echo "Thêm thành công";
-    // header("Location: main.php");
+    header("Location: list_article.php");
   } else {
     echo "Thêm thất bại";
-    // header("Location: add_product.php?failure");
   }
 }
 ?>
@@ -36,11 +35,15 @@ if (isset($_POST["btnsubmit"])) {
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./dashboard.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container mt-4">
-    <h1>Thêm bài báo</h1>
+  <div class="main container" style="margin-top: 100px;">
+    <h3 class="pb-3 font-italic border-bottom">
+      Thêm bài viết
+    </h3>
     <form action="#" method="post">
       <div id="editor"></div>
     </form>
@@ -214,10 +217,6 @@ if (isset($_POST["btnsubmit"])) {
     <script>
       let submitBtn = document.getElementById("submit");
       const main = document.getElementById("main")
-
-      // submitBtn.addEventListener('click', (e) => {
-
-      // })
     </script>
     <div class="container mt-4">
       <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="add_article.php" novalidate>
@@ -229,7 +228,7 @@ if (isset($_POST["btnsubmit"])) {
           </div>
         </div>
         <div class="col-md-6">
-          <label for="category" class="form-label">Thể loại</label>
+          <label for="category" class="form-label">Danh mục</label>
           <select class="form-select" name="txtCategory" id="category" required>
             <option selected disabled value="">Choose...</option>
             <?php
@@ -282,3 +281,14 @@ if (isset($_POST["btnsubmit"])) {
 </body>
 
 </html>
+
+<style>
+  .main {
+    width: 82vw;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 0.4rem 0.8rem #0005;
+    border-radius: 0.8rem;
+    padding: 20px;
+  }
+</style>

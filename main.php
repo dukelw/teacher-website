@@ -1,6 +1,14 @@
 <?php
 include_once("./entities/article.class.php");
 include_once("./entities/subject.class.php");
+$fp = './log/statistic.txt';
+$fo = fopen($fp, 'r');
+$count = fread($fo, filesize($fp));
+$count++;
+$fc = fclose($fo);
+$fo = fopen($fp, 'w');
+$fw = fwrite($fo, $count);
+$fc = fclose($fo);
 ?>
 
 <!doctype html>
@@ -27,7 +35,6 @@ include_once("./entities/subject.class.php");
 </head>
 
 <body>
-    <?php include_once("./header-topbar.php") ?>
     <div class="container">
         <?php include_once("./header.php");
         include_once("./slider.php")
@@ -84,13 +91,15 @@ include_once("./entities/subject.class.php");
                         <div class='card' style='width: 100%;'>
                             <a class='card-detail' href='article_detail.php?id=" . $article["ID"] . "'>
                                 <img src=" . $article["THUMBNAIL"] . " class='card-img-top custom-card-image' alt='Article Thumbnail'>
-                                <div class='card-body'>
+                                <div class='card-body d-flex flex-column' style='height: 350px;'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
+                                        <span class='subject'>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
-                                    <h4 class='card-title'> " . $article["TITLE"] . "</h4>
-                                    <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    <div style='flex: 1;' class='card-bottom d-flex flex-column'>
+                                        <h4 style='margin-bottom: auto;' class='card-title'> " . $article["TITLE"] . "</h4>
+                                        <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    </div>
                                 </div>
                                 </div>
                             </a>
@@ -138,13 +147,15 @@ include_once("./entities/subject.class.php");
                         <div class='card' style='width: 100%;'>
                             <a class='card-detail' href='article_detail.php?id=" . $article["ID"] . "'>
                                 <img src=" . $article["THUMBNAIL"] . " class='card-img-top custom-card-image' alt='Article Thumbnail'>
-                                <div class='card-body'>
+                                <div class='card-body d-flex flex-column' style='height: 350px;'>
                                     <div class='card-top'>
                                         <span>" . $article["PUBLISH"] . "</span>
-                                        <span>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
+                                        <span class='subject'>" . Subject::get_subject($article["TYPE"])[0]["NAME"] . "</span>
                                     </div>
-                                    <h4 class='card-title'> " . $article["TITLE"] . "</h4>
-                                    <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    <div style='flex: 1;' class='card-bottom d-flex flex-column'>
+                                        <h4 style='margin-bottom: auto;' class='card-title'> " . $article["TITLE"] . "</h4>
+                                        <p class='card-text'> " . $article["DESCRIPTION"] . "</p>
+                                    </div>
                                 </div>
                                 </div>
                             </a>
@@ -175,6 +186,8 @@ include_once("./entities/subject.class.php");
             fg: '#eceeef',
             text: 'Thumbnail'
         });
+
+        
     </script>
 </body>
 

@@ -24,7 +24,7 @@ $fc = fclose($fo);
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon" />
     <link href="./assets/css/blog.css" rel="stylesheet">
     <link href="./css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
@@ -38,7 +38,8 @@ $fc = fclose($fo);
 
 <body>
     <div class="container">
-        <?php include_once("./header.php");
+        <?php
+        include_once("./header.php");
         include_once("./slider.php")
         ?>
         <?php

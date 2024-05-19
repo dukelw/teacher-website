@@ -135,6 +135,7 @@
 }
 
 .submitbtn, .submitbtn-reply {
+  margin-top: 8px;
   cursor: pointer;
   display: block;
   margin-left: auto;

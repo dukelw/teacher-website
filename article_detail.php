@@ -63,6 +63,8 @@
     <link href="./assets/css/blog.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
     <link href="./css/article_detail.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/darkmode.css">
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
   </head>
 
   <body>
@@ -248,6 +250,7 @@
         }
       })
     </script>
+    <script src="./js/darkmode.js"></script>
   </body>
 
   </html>

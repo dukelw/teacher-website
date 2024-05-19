@@ -29,9 +29,11 @@ $fc = fclose($fo);
     <link href="./css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/darkmode.css">
     <script src="./assets/js/jquery-slim.min.js"></script>
     <script src="./assets/js/holder.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 </head>
 
 <body>
@@ -52,7 +54,7 @@ $fc = fclose($fo);
                             <a class='text-dark feature-title' href='#'>" . $featureone["TITLE"] . ".</a>
                         </h3>
                         <div class='mb-1 text-muted'>" . $featureone["PUBLISH"] . "</div>
-                        <p class='card-text mb-auto feature-description'>" . $featureone["DESCRIPTION"] . "</p>
+                        <p class='mb-auto feature-description'>" . $featureone["DESCRIPTION"] . "</p>
                         <a href='article_detail.php?id=" . $featureone["ID"] . "'>Tiếp tục đọc</a>
                     </div>
                     <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featureone["THUMBNAIL"] . "' alt='Card image cap'>
@@ -66,7 +68,7 @@ $fc = fclose($fo);
                             <a class='text-dark feature-title' href='#'>" . $featuretwo["TITLE"] . ".</a>
                         </h3>
                         <div class='mb-1 text-muted'>" . $featuretwo["PUBLISH"] . "</div>
-                        <p class='card-text mb-auto feature-description'>" . $featuretwo["DESCRIPTION"] . "</p>
+                        <p class='mb-auto feature-description'>" . $featuretwo["DESCRIPTION"] . "</p>
                         <a href='article_detail.php?id=" . $featuretwo["ID"] . "'>Tiếp tục đọc</a>
                     </div>
                     <img class='card-img-right flex-auto d-none d-md-block custom-image' src='" . $featuretwo["THUMBNAIL"] . "' alt='Card image cap'>
@@ -189,6 +191,7 @@ $fc = fclose($fo);
 
         
     </script>
+    <script src="./js/darkmode.js"></script>
 </body>
 
 </html>

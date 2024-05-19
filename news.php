@@ -1,6 +1,6 @@
 <?php
-include_once ("./entities/article.class.php");
-include_once ("./entities/subject.class.php");
+include_once("./entities/article.class.php");
+include_once("./entities/subject.class.php");
 ?>
 
 <!doctype html>
@@ -21,14 +21,16 @@ include_once ("./entities/subject.class.php");
   <link href="./css/article_detail.css" rel="stylesheet">
   <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="./css/news.css">
+  <link rel="stylesheet" href="./css/darkmode.css">
   <script src="./assets/js/jquery-slim.min.js"></script>
   <script src="./assets/js/holder.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <?php include_once ("./header.php");
+    <?php include_once("./header.php");
     ?>
   </div>
 
@@ -88,7 +90,7 @@ include_once ("./entities/subject.class.php");
                     <ul class='pagination' style='justify-content: center;'>";
 
           $prevPage = ($page > 1) ? $page - 1 : 1;
-          if (isset($_GET['subject'])) {
+          if (isset($_GET['subject']) && $totalPages > 1) {
             echo "<li class='page-item'><a class='page-link' href='news.php?page=$prevPage&subject=" . $_GET['subject'] . "' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
 
             for ($i = 1; $i <= $totalPages; $i++) {
@@ -99,15 +101,17 @@ include_once ("./entities/subject.class.php");
             $nextPage = ($page < $totalPages) ? $page + 1 : $totalPages;
             echo "<li class='page-item'><a class='page-link' href='news.php?page=$nextPage&subject=" . $_GET['subject'] . "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
           } else {
-            echo "<li class='page-item'><a class='page-link' href='news.php?page=$prevPage' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+            if ($totalPages > 1) {
+              echo "<li class='page-item'><a class='page-link' href='news.php?page=$prevPage' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
 
-            for ($i = 1; $i <= $totalPages; $i++) {
-              $activeClass = ($page == $i) ? 'active' : '';
-              echo "<li class='page-item $activeClass'><a class='page-link' href='news.php?page=$i'>$i</a></li>";
+              for ($i = 1; $i <= $totalPages; $i++) {
+                $activeClass = ($page == $i) ? 'active' : '';
+                echo "<li class='page-item $activeClass'><a class='page-link' href='news.php?page=$i'>$i</a></li>";
+              }
+
+              $nextPage = ($page < $totalPages) ? $page + 1 : $totalPages;
+              echo "<li class='page-item'><a class='page-link' href='news.php?page=$nextPage' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
             }
-
-            $nextPage = ($page < $totalPages) ? $page + 1 : $totalPages;
-            echo "<li class='page-item'><a class='page-link' href='news.php?page=$nextPage' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
           }
 
           echo "</ul></nav>";
@@ -126,7 +130,7 @@ include_once ("./entities/subject.class.php");
         $subject = Subject::list_subject();
         foreach ($subject as $subject) {
           echo "                            
-            <div class='sort-type d-flex justify-content-start align-items-center'> <span style='margin-right: 4px;' class='icon ti-agenda'></span> <a class='link' href='news.php?page=" . $page . "&subject=" . $subject["ID"] . "'>" . $subject["NAME"] .
+            <div class='sort-type d-flex justify-content-start align-items-center'> <span style='margin-right: 4px;' class='icon ti-agenda'></span> <a class='link' href='news.php?page=1&subject=" . $subject["ID"] . "'>" . $subject["NAME"] .
             "</a></div>";
         }
         ?>
@@ -134,11 +138,9 @@ include_once ("./entities/subject.class.php");
     </div>
   </main>
 
-  <?php include_once ("./footer.php") ?>
+  <?php include_once("./footer.php") ?>
 
-  <script src="./assets/js/jquery-slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+  <script src="./assets/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script>
     window.jQuery || document.write('<script src="./assets/js/jquery-slim.min.js"><\/script>')
   </script>
@@ -152,6 +154,7 @@ include_once ("./entities/subject.class.php");
       text: 'Thumbnail'
     });
   </script>
+  <script src="./js/darkmode.js"></script>
 </body>
 
 </html>

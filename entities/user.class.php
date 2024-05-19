@@ -1,4 +1,5 @@
 <?php
+
 require_once ("./config/db.class.php");
 require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
@@ -68,7 +69,20 @@ class User
   public static function checkLogin($mail, $password)
   {
     $db = new Db();
-    $sql = "SELECT * FROM user WHERE mail = '$mail' AND password = '$password'";
+    $sql = "SELECT * FROM user WHERE mail = '$mail' AND password = '$password' AND isAdmin != 1";
+    $result = $db->query_execute($sql);
+
+    if ($result->num_rows > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static function checkAdmin($mail, $password)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM user WHERE mail = '$mail' AND password = '$password' AND isAdmin = 1";
     $result = $db->query_execute($sql);
 
     if ($result->num_rows > 0) {
@@ -81,7 +95,7 @@ class User
   public static function get_user($email)
   {
     $db = new Db();
-    $sql = "SELECT * FROM user WHERE mail = '$email'";
+    $sql = "SELECT * FROM user WHERE mail = '$email' AND isAdmin != 1";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -89,7 +103,15 @@ class User
   public static function get_user_by_ID($id)
   {
     $db = new Db();
-    $sql = "SELECT * FROM user WHERE ID = '$id'";
+    $sql = "SELECT * FROM user WHERE ID = '$id' AND isAdmin != 1";
+    $result = $db->select_to_array($sql);
+    return $result;
+  }
+
+  public static function get_admin_by_email($email)
+  {
+    $db = new Db();
+    $sql = "SELECT * FROM user WHERE MAIL = '$email' AND isAdmin = 1";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -97,7 +119,7 @@ class User
   public static function list_user()
   {
     $db = new Db();
-    $sql = "SELECT * FROM user";
+    $sql = "SELECT * FROM user WHERE isAdmin != 1";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -109,7 +131,6 @@ class User
     $filepath = '';
 
     if (!empty($this->avatar['tmp_name']) && is_uploaded_file($this->avatar['tmp_name'])) {
-      // Nếu $this->avatar là một ảnh mới đã được tải lên từ máy khách
       $unique_filename = uniqid() . '_' . $this->avatar['name'];
       $filepath = "./upload/avatars/" . $unique_filename;
 
@@ -234,4 +255,12 @@ class User
         return false;
     }
 
+  public static function delete($id)
+  {
+    $db = new Db();
+    $sql = "DELETE FROM user
+            WHERE ID = '" . mysqli_real_escape_string($db->connect(), $id) . "'";
+    $result = $db->query_execute($sql);
+    return $result;
+  }
 }

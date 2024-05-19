@@ -1,44 +1,90 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
-<link
-    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-    rel="stylesheet">
-<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/footer.css">
-<link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
-<footer class="footer">
-    <div class="container">
-        <div class="footer-first footer-item">
-            <div class="col-sm-5">
-                <h4><a href=""><strong>Giới thiệu</strong></a></h4>
-                <h4><a href=""><strong>Giáo dục</strong></a></h4>
-                <h4><a href=""><strong>Tuyển sinh</strong></a></h4>
-            </div>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
+    <link rel="stylesheet" href="./css/footer.css">
 
-            <div class="col-sm-7">
-                <h4><a href=""><strong>Tin tức - sự kiện</strong></a></h4>
-                <h4><a href=""><strong>Khoa học công nghệ</strong></a></h4>
-                <h4><a href=""><strong>Cơ hội việc làm</strong></a></h4>
-            </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer_inner">
+                <div class="c-footer">
+                    <div class="layout row">
+                        <div class="col-md-12 mb-4">
+                            <div class="newsletter">
+                                <h3 class="newsletter_title">Doãn Xuân Thanh Website - Nơi cung cấp thông tin về công nghệ hiện đại chính xác và chuyên nghiệp.</h3>
+                            </div>
+                        </div>
 
-        <div class="footer-second footer-item col-lg-5 col-md-5 col-sm-12 col-xs-12 column">
-            <h2 class="block-title"><span>Liên hệ</span></h2>
-            <div>
-                <span class="ti-home"></span>
-                Địa chỉ: Phòng C004, Số 19 Nguyễn
-                Hữu Thọ, P. Tân
-                Phong, Quận 7, Tp. Hồ Chi Minh.
+                        <div class="col-md-6 col-12">
+                            <nav class="c-nav-tool">
+                                <h4 class="c-nav-tool_title">Danh mục</h4>
+                                <ul class="c-nav-tool_list">
+                                    <li>
+                                        <a href="./news.php" class="c-link">Tin tức</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="./document.php" class="c-link">Tài liệu</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="./notifications.php" class="c-link">Thông báo</a>
+                                    </li>
+                                    <li>
+                                        <a href="./career.php" class="c-link">Doanh nghiệp IT</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <nav class="c-nav-tool">
+                                <h4 class="c-nav-tool_title">Về tôi</h4>
+                                <ul class="c-nav-tool_list">
+
+                                    <li class="c-nav-tool_item">
+                                        <a href="./introduction.php" class="c-link">Giới thiệu</a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="c-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                    <div class="layout c-2">
+                        <div class=" w-100">
+                            <ul class="socials">
+                                <li>
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                                            <path fill="none" d="M0 0h24v24H0z" />
+                                            <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copyright">
+                <p>&copy; Xây dựng bởi 52200038, 52200126, 52200195.</p>
             </div>
         </div>
-    </div>
-    <div class="footer-copyright">
-        <p>@Copyright 52200038, 52200195, 52200126
-        </p>
-        <p>
-            <a href="https://tdtu.edu.vn/">Đại học Tôn Đức Thắng</a>
-        </p>
-    </div>
-</footer>
+    </footer>

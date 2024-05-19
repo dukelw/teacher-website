@@ -188,6 +188,8 @@ $fc = fclose($fo);
             fg: '#eceeef',
             text: 'Thumbnail'
         });
+
+        
     </script>
     <script src="./js/darkmode.js"></script>
 </body>

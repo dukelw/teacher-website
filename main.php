@@ -24,19 +24,22 @@ $fc = fclose($fo);
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
     <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link rel="icon" href="./assets/images/logo.svg" type="image/x-icon" />
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon" />
     <link href="./assets/css/blog.css" rel="stylesheet">
     <link href="./css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/icon/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/darkmode.css">
     <script src="./assets/js/jquery-slim.min.js"></script>
     <script src="./assets/js/holder.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <?php include_once("./header.php");
+        <?php
+        include_once("./header.php");
         include_once("./slider.php")
         ?>
         <?php
@@ -186,7 +189,10 @@ $fc = fclose($fo);
             fg: '#eceeef',
             text: 'Thumbnail'
         });
+
+        
     </script>
+    <script src="./js/darkmode.js"></script>
 </body>
 
 </html>

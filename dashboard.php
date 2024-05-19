@@ -1,8 +1,16 @@
 <?php
+include_once('./entities/user.class.php');
+// session_start();
+// if (!isset($_SESSION['useremail'])) {
+//   header("Location: signin.php");
+// } else {
+//   if (count(User::get_admin_by_email($_SESSION['useremail'])) <= 0) {
+//     header("Location: notfound.php");
+//   }
+// }
 include_once('./entities/article.class.php');
 include_once('./entities/document.class.php');
 include_once('./entities/subject.class.php');
-include_once('./entities/user.class.php');
 
 if (isset($_POST["delete-article"])) {
   $delete_id = $_POST["delete-article"];
@@ -32,6 +40,7 @@ if (isset($_POST["delete-user"])) {
   <!-- My CSS -->
   <link rel="stylesheet" href="./css/dashboard.css">
   <link rel="stylesheet" href="./css/admin_article.css">
+  <link rel="icon" href="./assets/images/dashboard.png" type="image/x-icon" />
 
   <title>AdminHub</title>
 </head>
@@ -164,7 +173,7 @@ if (isset($_POST["delete-user"])) {
                 $fp = './log/statistic.txt';
                 $fo = fopen($fp, 'r');
                 $count = fread($fo, filesize($fp));
-                echo "<h2>$count</h2>"
+                echo $count;
                 ?></h3>
             <p>Lượt truy cập</p>
           </span>
@@ -284,6 +293,4 @@ if (isset($_POST["delete-user"])) {
   </script>
 </body>
 
-.status.job {
-background-color: #6fcaea;
-}
+</html>

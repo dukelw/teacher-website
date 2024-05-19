@@ -1,0 +1,42 @@
+/* Default light mode background color */
+body {
+  background-color: #fff;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* Dark mode background color */
+body.darkmode--activated {
+  /* Your preferred dark mode background color */
+  color: #ffffff !important;
+}
+
+body.darkmode--activated .navbar {
+  background-color: #333333 !important;
+  border-bottom: 1px solid #444444 !important;
+}
+
+body.darkmode--activated .card {
+  background-color: #2e2e2e !important;
+  border: 1px solid #444444 !important;
+}
+
+body.darkmode--activated .text-muted,
+body.darkmode--activated .notification-title,
+body.darkmode--activated .c-nav-tool_list li a,
+body.darkmode--activated .text-dark,
+body.darkmode--activated .card-title,
+body.darkmode--activated .sort-type a,
+body.darkmode--activated .card-text,
+body.darkmode--activated .socials svg {
+  color: #ffffff !important;
+}
+body.darkmode--activated .comment__card p,
+body.darkmode--activated .comment__card .time,
+body.darkmode--activated .comment__card .action,
+body.darkmode--activated .comment__title {
+  color: black !important;
+}
+

@@ -353,6 +353,7 @@ img {
     position: relative;
     justify-items: center;
     margin-block: 2.5rem 4.5rem;
+    justify-content: center;
 }
 
 .about__image {
@@ -372,10 +373,10 @@ img {
 }
 
 .about__shadow {
-    width: 150px;
-    height: 385px;
+    width: 250px;
+    height: 190px;
     background-color: var(--body-color);
-    top: -2.5rem;
+    top: -2rem;
     right: -3.5rem;
     border-bottom: 4px solid var(--fisrt-color);
     transition: background-color .4s;
@@ -905,8 +906,8 @@ img {
         width: 80px;
     }
     .home__line{
-        left: -15rem;
-        bottom: 4rem;
+        left: -1rem;
+        bottom: 12rem;
         width: 80px;
         rotate: 30deg;
     }
@@ -939,8 +940,8 @@ img {
         border: 8px solid var(--white-color);
     }
     .about__shadow{
-        width: 240px;
-        height: 615px;
+        width: 400px;
+        height: 340px;
         top: -4rem;
         right: -5.5rem;
         border-bottom: 6px solid var(--fisrt-color);

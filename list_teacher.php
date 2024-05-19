@@ -47,7 +47,7 @@ $teachers = User::list_user();
                     </tr>
                     <?php foreach ($teachers as $teacher): ?>
                         <tr>
-                            <td><img style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;}"
+                            <td><img style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%"
                                     src="<?php echo $teacher['AVATAR']; ?>" alt="Ảnh đại diện"></td>
                             <td><?php echo $teacher['NAME']; ?></td>
                             <td><?php echo $teacher['MAIL']; ?></td>

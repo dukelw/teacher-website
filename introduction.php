@@ -39,7 +39,7 @@
 
                 <div class="home__perfil">
                     <div class="home__image">
-                        <img src="./assets/images/home-perfil.jpg" alt="image" class="home__img">
+                        <img src="./assets/images/avatarDT.jpg" alt="image" class="home__img">
                         <div class="home__shadow"></div>
 
                         <img src="./assets/images/curved-arrow.svg" alt="" class="home__arrow">
@@ -87,7 +87,7 @@
                 </h2>
                 <div class="about__perfil">
                     <div class="about__image">
-                        <img src="./assets/images/about-perfil.jpg" alt="image" class="about__img">
+                        <img src="./assets/images/avatarDT.jpg" alt="image" class="about__img">
 
                         <div class="about__shadow">
                         </div>

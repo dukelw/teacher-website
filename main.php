@@ -186,6 +186,8 @@ $fc = fclose($fo);
             fg: '#eceeef',
             text: 'Thumbnail'
         });
+
+        
     </script>
 </body>
 

@@ -103,7 +103,7 @@ class User
   public static function get_user_by_ID($id)
   {
     $db = new Db();
-    $sql = "SELECT * FROM user WHERE ID = '$id' AND isAdmin != 1";
+    $sql = "SELECT * FROM user WHERE ID = '$id'";
     $result = $db->select_to_array($sql);
     return $result;
   }

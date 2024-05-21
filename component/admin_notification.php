@@ -13,7 +13,7 @@ include_once('../entities/subject.class.php');
 <main id="main">
   <div class="head-title">
     <div class="left">
-      <h1>Bài báo (<?= count(Article::list_articles()) ?>)
+      <h1>Thông báo (<?= count(Article::list_notifications()) ?>)
       </h1>
       <ul class="breadcrumb">
         <li>
@@ -21,7 +21,7 @@ include_once('../entities/subject.class.php');
         </li>
         <li><i class='bx bx-chevron-right'></i></li>
         <li>
-          <a class="active" class="navigate" href="#">Bài báo</a>
+          <a class="active" class="navigate" href="#">Thông báo</a>
         </li>
       </ul>
     </div>
@@ -51,7 +51,7 @@ include_once('../entities/subject.class.php');
         </thead>
         <tbody>
           <?php
-          $articles = Article::list_items();
+          $articles = Article::list_notifications();
           $order = 1;
           foreach ($articles as $article) {
             $type = "notification";

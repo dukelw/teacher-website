@@ -6,6 +6,7 @@
   include_once("../entities/subject.class.php");
   include_once("../entities/comment.class.php");
   include_once("../entities/user.class.php");
+  include_once("../entities/notification.class.php");
   ?>
 
   <?php
@@ -21,7 +22,7 @@
   if (isset($_SESSION['useremail'])) {
     if (isset($_POST['content'])) {
       $articleID = $_GET["id"];
-      $userID = intval($_SESSION['userID']);
+      $userID = intval($_SESSION['userid']);
       $username = $_SESSION["username"];
       $userthumb = $_SESSION["userthumb"];
       $parentName = '';
@@ -34,6 +35,10 @@
       }
       $result = Comment::createComment($articleID, $userID, $username, $userthumb, $parentName, $content, $parent_comment_id);
       if ($result) {
+        $title = "Bình luận";
+        $content = $username . " đã bình luận: \"" . $content . "\" trong bài viết " . $article[0]["TITLE"];
+        $notification = new Notification($title, $content, 2, $article[0]["ID"], $_SESSION["userid"]);
+        $notification->save();
         header("Location: #");
       }
     }

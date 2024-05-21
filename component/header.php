@@ -6,18 +6,19 @@ session_start();
 
 <?php
 require_once("../entities/user.class.php");
-$loginAttempted = true;
+$loginAttempted = "";
+
 if (isset($_SESSION['username']) != "") {
 }
 if (isset($_POST["email"]) && isset($_POST["password"])) {
-  $loginAttempted = false; // Khởi tạo biến kiểm tra đăng nhập
+  $loginAttempted = true;
   $success = User::checkLogin($_POST["email"], $_POST["password"]);
   if (!$success) {
-    $loginAttempted = false; // Đã thử đăng nhập
+    $loginAttempted = "Sai thông tin đăng nhập";
   } else {
     $email = $_POST["email"];
     $username = User::get_user($email);
-    $_SESSION['userID'] = $username[0]['ID'];
+    $_SESSION['userid'] = $username[0]['ID'];
     $_SESSION['username'] = $username[0]["NAME"];
     $_SESSION['useremail'] = $email;
     $_SESSION['userthumb'] = $username[0]['AVATAR'];
@@ -77,11 +78,6 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                   </a>
                   
                </li>
-
-               <li class='dropdown__item'>
-                  <i class='ri-settings-3-line dropdown__icon'></i>
-                  <span class='dropdown__name'>Settings</span>
-               </li>
             </ul>
           </div>";
       } else {
@@ -93,37 +89,41 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
   <!--==================== LOGIN ====================-->
   <div class="login" id="login">
-    <form class="login__form" action="" method="POST">
-      <h2 class="login__title">Log In</h2>
+    <form class="login__form needs-validation" action="" method="POST" novalidate>
+      <h2 class="login__title">Đăng nhập</h2>
 
-      <?php if ($loginAttempted === false) : ?>
+      <?php if (!empty($error_message)) : ?>
         <div class="alert alert-danger" role="alert">
-          <i class="ri-error-warning-line mr-2"></i> Sai mật khẩu hoặc tài khoản!
+          <?= $error_message ?>
         </div>
       <?php endif; ?>
 
       <div class="login__group">
-        <div>
-          <label for="email" class="login__label">Email</label>
-          <input type="email" name="email" placeholder="Write your email" id="email" class="login__input">
+        <div class="mb-2">
+          <input type="email" name="email" placeholder="Email" id="email" class="login__input form-control" required>
+          <div class="invalid-feedback">
+            Vui lòng nhập email hợp lệ.
+          </div>
         </div>
 
-        <div>
-          <label for="" class="login__label">Password</label>
-          <input type="password" name="password" placeholder="Enter your password" id="password" class="login__input">
+        <div class="mb-2">
+          <input type="password" name="password" placeholder="Mật khẩu" id="password" class="login__input form-control" required>
+          <div class="invalid-feedback">
+            Vui lòng nhập mật khẩu.
+          </div>
         </div>
       </div>
 
       <div>
         <p class="login__signup">
-          You do not have an account? <a href="./signup.php">Sign up</a>
+          Chưa có tài khoản? <a href="./signup.php">Đăng ký</a>
         </p>
 
         <a href="./forgot_password.php" class="login__forgot">
-          You forgot your password
+          Quên mật khẩu
         </a>
 
-        <button type="submit" class="login__button">Log In</button>
+        <button type="submit" class="login__button btn btn-primary">Đăng nhập</button>
       </div>
     </form>
 
@@ -138,6 +138,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     <a class="p-2 text-muted" href="notifications.php">Thông báo</a>
     <a class="p-2 text-muted" href="news.php">Tin tức</a>
     <a class="p-2 text-muted" href="./career.php">Doanh nghiệp</a>
+    <a class="p-2 text-muted" href="./dashboard.php">Trang quản trị viên</a>
   </nav>
 </div>
 <script src="../js/header.js"></script>
@@ -223,6 +224,24 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       searchToggle.classList.remove('hide');
     };
   }
+
+  (() => {
+    'use strict';
+
+    const forms = document.querySelectorAll('.needs-validation');
+
+    Array.prototype.slice.call(forms)
+      .forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+  })();
 
   const user = document.querySelector(".user-info");
 

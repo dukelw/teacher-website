@@ -11,11 +11,13 @@
 <link href="../assets/css/blog.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
 <link href="../css/update_info.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/darkmode.css">
 <link rel="stylesheet" href="../assets/icon/themify-icons/themify-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <?php
+session_start();
 echo "<div class='container'>";
 include_once("../entities/user.class.php");
-session_start();
 echo "</div>";
 
 if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbnail"])) {
@@ -28,7 +30,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
   $month = $_POST["birthdayMonth"];
   $year = $_POST["birthdayYear"];
   $birthday = $year . "-" . $month . "-" . $day;
-  $user = User::get_user_by_ID($_SESSION['userID']);
+  $user = User::get_user($_SESSION['useremail']);
   $file = $_FILES['thumbnail'];
 
   $avatar = (!empty($file['tmp_name'])) ? $file : $user[0]["AVATAR"];
@@ -36,6 +38,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
   if ($name != $user[0]['NAME']) {
     $user[0]['NAME'] = $name;
   }
+
 
   if ($address != $user[0]['ADDRESS']) {
     $user[0]['ADDRESS'] = $address;
@@ -53,6 +56,10 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
     $user[0]['BIRTHDAY'] = $birthday;
   }
 
+  if ($avatar != $user[0]["AVATAR"]) {
+    $user[0]['AVATAR'] = $avatar;
+  }
+
   $newUser = new User(
     $user[0]['NAME'],
     $user[0]['MAIL'],
@@ -64,7 +71,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
     $user[0]['ADDRESS'],
   );
 
-  $result = $newUser->update_information($_SESSION['userID']);
+  $result = $newUser->update_information($_SESSION['userid']);
 
 
   if ($result) {
@@ -75,6 +82,11 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
 }
 ?>
 
+<div class="container">
+  <div class="navigation">
+    <a class="btn custom-btn" href="main.php">Quay về trang chủ</a>
+  </div>
+</div>
 <form enctype="multipart/form-data" action="update_info.php" method="POST" class="container rounded bg-white mt-5 mb-5">
   <div class="row">
     <div class="col-md-3 border-right">
@@ -93,7 +105,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
       <div class="p-3 py-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <span class="title text-right">Thay đổi thông tin</span>
-          <button class="btn btn-primary edit-btn" type="button">Chỉnh sửa</button>
+          <button class="btn custom-btn edit-btn" type="button">Chỉnh sửa</button>
         </div>
         <div class="row mt-3">
           <div class="col-md-12"><label class="labels">Tên</label><input disabled type="text" name="name" class="form-control" value="<?= User::get_user($_SESSION['useremail'])[0]["NAME"] ?>"></div>
@@ -172,7 +184,7 @@ if (isset($_POST["name"]) || isset($_POST["btnsubmit"]) || isset($_FILES["thumbn
             </div>
           </div>
         </div>
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button save-btn" name="btnsubmit" type="submit" disabled>Lưu thay đổi</button></div>
+        <div class="mt-5 text-center"><button class="btn custom-btn profile-button save-btn" name="btnsubmit" type="submit" disabled>Lưu thay đổi</button></div>
       </div>
     </div>
   </div>
@@ -231,3 +243,4 @@ include_once("footer.php");
     }
   });
 </script>
+<script src="../js/darkmode.js"></script>

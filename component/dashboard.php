@@ -7,6 +7,7 @@ if (!isset($_SESSION['adminemail'])) {
 include_once('../entities/article.class.php');
 include_once('../entities/document.class.php');
 include_once('../entities/subject.class.php');
+include_once('../entities/notification.class.php');
 
 if (isset($_POST["delete-article"])) {
   $delete_id = $_POST["delete-article"];
@@ -21,6 +22,11 @@ if (isset($_POST["delete-document"])) {
 if (isset($_POST["delete-user"])) {
   $delete_id = $_POST["delete-user"];
   $result = User::delete($delete_id);
+}
+
+if (isset($_POST["read-noti"])) {
+  $noti_id = $_POST["read-noti"];
+  $result = Notification::checked($noti_id);
 }
 ?>
 
@@ -74,7 +80,7 @@ if (isset($_POST["delete-user"])) {
         </a>
       </li>
       <li>
-        <a class="navigate" href="">
+        <a class="navigate" href="admin_notification.php">
           <i class='bx bxs-message-dots'></i>
           <span class="text">Thông báo</span>
         </a>
@@ -104,15 +110,17 @@ if (isset($_POST["delete-user"])) {
       <i class='bx bx-menu'></i>
       <form action="#">
         <div class="form-input">
-          <input type="search" placeholder="Search...">
+          <input type="search" placeholder="Tìm bài viết...">
           <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
         </div>
+        <ul class='search-results hide'>
+        </ul>
       </form>
       <input type="checkbox" id="switch-mode" hidden>
       <label for="switch-mode" class="switch-mode"></label>
-      <a class="navigate" href="#" class="notification">
+      <a href="notice.php" class="notification navigate">
         <i class='bx bxs-bell'></i>
-        <span class="num">8</span>
+        <span class="num"><?= count(Notification::list_notification_of_user($_SESSION['userid'])) ?></span>
       </a>
       <a href="update_info.php" class="profile">
         <?php
@@ -153,7 +161,7 @@ if (isset($_POST["delete-user"])) {
           <i class='bx bxs-calendar-check'></i>
           <span class="text">
             <h3><?= count(Article::list_items()) ?></h3>
-            <p>Bài viết</p>
+            <p>Bài viết và thông báo</p>
           </span>
         </li>
         <li>
@@ -248,6 +256,13 @@ if (isset($_POST["delete-user"])) {
       const deleteSuccess = true;
       deleteForm.submit()
     }
+
+    function handleRead(ID) {
+      readForm = document.querySelector('.read-form');
+      inputRead = document.querySelector('.read-article');
+      inputRead.value = ID
+      readForm.submit()
+    }
   </script>
   <script src="../js/dashboard.js"></script>
   <script>
@@ -286,6 +301,67 @@ if (isset($_POST["delete-user"])) {
         inputDelete.value = ID
         deleteForm.submit();
       }
+    }
+
+    const searchBox = document.querySelector('input[type=search]');
+    const searchResults = document.querySelector('.search-results');
+    const searchBtn = document.querySelector('.search-btn');
+
+    searchBox.oninput = function(event) {
+      performSearch();
+    }
+
+    searchBox.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        performSearch();
+      }
+    });
+
+    searchBtn.onclick = (event) => {
+      event.preventDefault();
+      performSearch();
+    }
+
+    function performSearch() {
+      searchResults.classList.remove('hide')
+      const keySearch = searchBox.value.trim();
+      if (keySearch !== '') {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search_articles.api.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            const articles = JSON.parse(xhr.responseText);
+            displayResults(articles);
+          }
+        };
+
+        xhr.send(`keysearch=${keySearch}`);
+      }
+    }
+
+    function displayResults(articles) {
+      searchResults.innerHTML = "<li class='text-right close-btn'> &times </li>";
+      if (articles.length > 0) {
+        articles.forEach(article => {
+          searchResults.innerHTML += `
+                <li class='d-flex justify-content-between align-items-center'>
+                    <img class='news-image' src='${article.THUMBNAIL}' alt='Thumbnail'/>
+                    <div class='info'>
+                        <a href='article_detail.php?id=${article.ID}' class='notification-title'>${article.TITLE}</a>
+                        <span class='publish-day'>${article.PUBLISH}</span>
+                    </div>
+                </li>`;
+        });
+      } else {
+        searchResults.innerHTML += "<li>Không có bài báo nào được tìm thấy</li>";
+      }
+
+      document.querySelector('.close-btn').onclick = function(event) {
+        searchResults.innerHTML = '';
+        searchResults.classList.add = 'hide';
+      };
     }
   </script>
 </body>

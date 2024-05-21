@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/db.class.php");
+require_once("../config/db.class.php");
 
 class Document
 {
@@ -80,7 +80,7 @@ class Document
     $file_temp = $this->docfile['tmp_name'];
     $user_file = $this->docfile['name'];
     $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-    $filepath = "./upload/documents/" . $timestamp . $user_file;
+    $filepath = "../upload/documents/" . $timestamp . $user_file;
     if (move_uploaded_file($file_temp, $filepath) == false) {
       return false;
     }
@@ -108,7 +108,7 @@ class Document
 
     if (!empty($this->docfile['tmp_name'])) {
       $unique_filename = uniqid() . '_' . $this->docfile['name'];
-      $filepath = "./upload/documents/" . $unique_filename;
+      $filepath = "../upload/documents/" . $unique_filename;
 
       if (!move_uploaded_file($this->docfile['tmp_name'], $filepath)) {
         return false;

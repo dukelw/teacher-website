@@ -3,10 +3,23 @@
   font-weight: 500;
 }
 
+.navigation {
+  margin-top: 20px;
+}
+
 .user-avatar-big {
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+
+.custom-btn {
+  background-color: #212529;
+  color: #ffffff;
+}
+
+.custom-btn:hover {
+  color: #ffffff;
 }
 
 .title {

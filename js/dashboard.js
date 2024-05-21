@@ -55,10 +55,25 @@ window.addEventListener("resize", function () {
 
 const switchMode = document.getElementById("switch-mode");
 
-switchMode.addEventListener("change", function () {
-  if (this.checked) {
+function setDarkMode(isDark) {
+  if (isDark) {
     document.body.classList.add("dark");
+    switchMode.checked = true;
   } else {
     document.body.classList.remove("dark");
+    switchMode.checked = false;
+  }
+}
+
+switchMode.addEventListener("change", function () {
+  const isDark = this.checked;
+  setDarkMode(isDark);
+  localStorage.setItem("darkMode", isDark);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const savedMode = localStorage.getItem("darkMode");
+  if (savedMode) {
+    setDarkMode(JSON.parse(savedMode));
   }
 });

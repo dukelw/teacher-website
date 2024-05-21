@@ -1,5 +1,5 @@
 <?php
-require_once ("./config/db.class.php");
+require_once("../config/db.class.php");
 ?>
 <?php
 class Article
@@ -41,7 +41,7 @@ class Article
     $file_temp = $this->thumbnail['tmp_name'];
     $user_file = $this->thumbnail['name'];
     $timestamp = date("Y") . date("m") . date("d") . date("h") . date("i") . date("s");
-    $filepath = "./upload/article-thumbnails/" . $timestamp . $user_file;
+    $filepath = "../upload/article-thumbnails/" . $timestamp . $user_file;
     if (move_uploaded_file($file_temp, $filepath) == false) {
       return false;
     }
@@ -196,7 +196,7 @@ class Article
     if (!empty($this->thumbnail['tmp_name'])) {
       // Generate a unique file name
       $unique_filename = uniqid() . '_' . $this->thumbnail['name'];
-      $filepath = "./upload/article-thumbnails/" . $unique_filename;
+      $filepath = "../upload/article-thumbnails/" . $unique_filename;
 
       // Move the uploaded file to the destination directory
       if (!move_uploaded_file($this->thumbnail['tmp_name'], $filepath)) {

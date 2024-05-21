@@ -1,13 +1,9 @@
 <?php
 include_once('../entities/user.class.php');
-// session_start();
-// if (!isset($_SESSION['useremail'])) {
-//   header("Location: signin.php");
-// } else {
-//   if (count(User::get_admin_by_email($_SESSION['useremail'])) <= 0) {
-//     header("Location: notfound.php");
-//   }
-// }
+session_start();
+if (!isset($_SESSION['adminemail'])) {
+  header("Location: admin_login.php");
+}
 include_once('../entities/article.class.php');
 include_once('../entities/document.class.php');
 include_once('../entities/subject.class.php');
@@ -120,8 +116,9 @@ if (isset($_POST["delete-user"])) {
       </a>
       <a href="update_info.php" class="profile">
         <?php
-        if (isset($user[0]['AVATAR']) && !empty($user[0]['AVATAR'])) {
-          echo '<img src="' . $user[0]['AVATAR'] . '">';
+        $admin = User::get_admin_by_email($_SESSION['adminemail']);
+        if (isset($admin[0]['AVATAR']) && !empty($admin[0]['AVATAR'])) {
+          echo '<img src="' . $admin[0]['AVATAR'] . '">';
         } else {
           echo '<img src="https://i.pinimg.com/originals/ac/0b/3b/ac0b3b4f2f7c1a89e045b2f186d6f7e1.jpg">';
         }

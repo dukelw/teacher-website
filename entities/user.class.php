@@ -95,7 +95,7 @@ class User
   public static function get_user($email)
   {
     $db = new Db();
-    $sql = "SELECT * FROM user WHERE mail = '$email' AND isAdmin != 1";
+    $sql = "SELECT * FROM user WHERE mail = '$email'";
     $result = $db->select_to_array($sql);
     return $result;
   }
@@ -126,8 +126,6 @@ class User
 
   public function update_information($id)
   {
-    $existing_user = $this->get_user_by_ID($id);
-
     $filepath = '';
 
     if (!empty($this->avatar['tmp_name']) && is_uploaded_file($this->avatar['tmp_name'])) {
@@ -139,7 +137,7 @@ class User
       }
     } else {
       // Nếu $this->avatar là ảnh cũ
-      $filepath = $existing_user[0]['AVATAR'];
+      $filepath = $this->avatar;
     }
 
     $db = new Db();
@@ -196,7 +194,7 @@ class User
       $encoded_subject = mb_convert_encoding($subject, 'UTF-8', 'auto');
       $mail->Subject = $encoded_subject;
 
-      $mail->Body = "You have requested to reset your password. Please click the following link to reset your password: $resetLink";
+      $mail->Body = "You have requested to reset your password. Please click the following link to reset your password: <br/><br/> $resetLink";
 
       $mail->send();
       return true;
@@ -220,7 +218,7 @@ class User
       $insertResult = $db->query_execute($sql);
 
       if ($insertResult) {
-        $resetLink = "http://localhost:3000/Users/ASUS/OneDrive/Desktop/teacher-website/reset_password.php?token=$token";
+        $resetLink = "http://localhost:3000/Users/ASUS/OneDrive/Máy tính/teacher_website/component/reset_password.php?token=$token";
 
         if (self::sendResetPasswordEmail($email, $resetLink)) {
           return true;
@@ -229,8 +227,6 @@ class User
     }
     return false;
   }
-
-
 
   // Hàm đặt lại mật khẩu với mã hóa
   public static function resetPassword($token, $newPassword)

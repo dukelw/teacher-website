@@ -1,12 +1,14 @@
 <?php
-include_once('../entities/user.class.php');
+include_once ('../entities/user.class.php');
 session_start();
 if (!isset($_SESSION['adminemail'])) {
   header("Location: admin_login.php");
 }
-include_once('../entities/article.class.php');
-include_once('../entities/document.class.php');
-include_once('../entities/subject.class.php');
+include_once ('../entities/article.class.php');
+include_once ('../entities/document.class.php');
+include_once ('../entities/subject.class.php');
+include_once ('../entities/slide.class.php');
+
 
 if (isset($_POST["delete-article"])) {
   $delete_id = $_POST["delete-article"];
@@ -21,6 +23,10 @@ if (isset($_POST["delete-document"])) {
 if (isset($_POST["delete-user"])) {
   $delete_id = $_POST["delete-user"];
   $result = User::delete($delete_id);
+}
+if (isset($_POST["delete-slide"])) {
+  $slide_id = $_POST["delete-slide"];
+  $result = Slide::delete($slide_id);
 }
 ?>
 
@@ -65,6 +71,12 @@ if (isset($_POST["delete-user"])) {
         <a class="navigate" href="admin_document.php">
           <i class='bx bxs-file'></i>
           <span class="text">Tài liệu</span>
+        </a>
+      </li>
+      <li>
+        <a class="navigate" href="admin_slide.php">
+          <i class='bx bxs-group'></i>
+          <span class="text">Slide</span>
         </a>
       </li>
       <li>
@@ -167,11 +179,11 @@ if (isset($_POST["delete-user"])) {
           <i class='bx bxs-group'></i>
           <span class="text">
             <h3><?php
-                $fp = '../log/statistic.txt';
-                $fo = fopen($fp, 'r');
-                $count = fread($fo, filesize($fp));
-                echo $count;
-                ?></h3>
+            $fp = '../log/statistic.txt';
+            $fo = fopen($fp, 'r');
+            $count = fread($fo, filesize($fp));
+            echo $count;
+            ?></h3>
             <p>Lượt truy cập</p>
           </span>
         </li>
@@ -252,13 +264,13 @@ if (isset($_POST["delete-user"])) {
   <script src="../js/dashboard.js"></script>
   <script>
     document.querySelectorAll('.navigate').forEach(link => {
-      link.addEventListener('click', function(event) {
+      link.addEventListener('click', function (event) {
         event.preventDefault();
 
         let href = this.getAttribute('href');
 
         let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
           if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
               document.getElementById('main').innerHTML = xhr.responseText;
@@ -283,6 +295,15 @@ if (isset($_POST["delete-user"])) {
       if (confirm("Bạn có chắc chắn muốn xóa tài liệu này không?")) {
         deleteForm = document.querySelector('.delete-form');
         inputDelete = document.querySelector('.delete-user');
+        inputDelete.value = ID
+        deleteForm.submit();
+      }
+    }
+
+    function handleDeleteSlide(ID) {
+      if (confirm("Bạn có chắc chắn muốn xóa slide này không?")) {
+        deleteForm = document.querySelector('.delete-form');
+        inputDelete = document.querySelector('.delete-slide');
         inputDelete.value = ID
         deleteForm.submit();
       }

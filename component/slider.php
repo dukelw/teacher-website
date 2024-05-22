@@ -1,18 +1,29 @@
+<?php
+include_once ("../entities/slide.class.php");
+$slides = Slide::list_slides();
+?>
+
 <link rel="stylesheet" href="../css/slider.css">
 <div id="carouselExampleControls" class="carousel slide wrapper" data-ride="carousel">
   <div class="carousel-inner" style="border-radius: 10px">
-    <div class="carousel-item active">
-      <img src="https://it.tdtu.edu.vn/sites/cntt/files/2022-10/2.JPG" class="d-block w-100" alt="Banner Image">
-    </div>
-    <div class="carousel-item">
-      <img src="https://tdtu.edu.vn/sites/www/files/events/2024/Apr/JF.png" class="d-block w-100" alt="Banner Image">
-    </div>
+    <?php
+    $first = true;
+    foreach ($slides as $slide) {
+      $activeClass = $first ? 'active' : '';
+      echo "<div class='carousel-item $activeClass'>
+              <img src='" . $slide["FILE"] . "' class='d-block w-100' alt='Slide Image'>
+            </div>";
+      $first = false;
+    }
+    ?>
   </div>
-  <button class="carousel-control-prev button" type="button" data-target="#carouselExampleControls" data-slide="prev">
+  <button class="carousel-control-prev button" type="button" data-target="#carouselExampleControls"
+    data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </button>
-  <button class="carousel-control-next button" type="button" data-target="#carouselExampleControls" data-slide="next">
+  <button class="carousel-control-next button" type="button" data-target="#carouselExampleControls"
+    data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </button>

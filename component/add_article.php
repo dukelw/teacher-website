@@ -314,9 +314,9 @@ if (isset($_POST["btncategorysubmit"])) {
               console.error(error);
             });
         </script>
-        <div style="padding: 0;" class="container mt-4">
-          <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post"
-            action="add_article.php" novalidate>
+
+        <div style="padding: 0;" class="mt-4">
+          <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="add_article.php" novalidate>
             <div class="col-md-6">
               <label for="name" class="form-label">Tiêu đề</label>
               <input type="text" name="txtName" class="form-control" id="name" required>

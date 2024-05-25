@@ -102,25 +102,18 @@ class Document
   {
     $db = new Db();
 
-    // Get the existing document
     $existing_document = $this->get_document($id);
 
-    // Initialize $filepath
     $filepath = '';
 
-    // Check if a new file is uploaded
     if (!empty($this->docfile['tmp_name'])) {
-      // Generate a unique file name
       $unique_filename = uniqid() . '_' . $this->docfile['name'];
       $filepath = "../upload/documents/" . $unique_filename;
 
-      // Move the uploaded file to the destination directory
       if (!move_uploaded_file($this->docfile['tmp_name'], $filepath)) {
-        // Handle file upload error (e.g., log error or show user message)
         return false;
       }
     } else {
-      // If no new file uploaded, use the existing file path
       $filepath = $existing_document[0]['docfile'];
     }
 

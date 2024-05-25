@@ -1,5 +1,5 @@
 <?php
-include_once("../entities/article.class.php");
+include_once ("../entities/article.class.php");
 
 if (isset($_POST['keysearch']) && $_POST['keysearch'] != '') {
   $keySearch = $_POST['keysearch'];

@@ -1,5 +1,5 @@
 <?php
-include_once("../entities/user.class.php");
+include_once ("../entities/user.class.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST["avatar"])) {
         $_POST["avatar"] = ''; // Đặt giá trị mặc định cho avatar là chuỗi rỗng
@@ -40,7 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/signup.css">
 </head>
 
@@ -53,8 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="row">
                     <!-- First Name -->
                     <div class="col">
-                        <label for="full-name" class="form-label">Họ và tên<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Lê Phan Thế Vĩ" id="full-name" name="full-name" required />
+                        <label for="full-name" class="form-label">Họ và tên<span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Lê Phan Thế Vĩ"
+                            id="full-name" name="full-name" required />
                         <div class="invalid-feedback">
                             Hãy nhập đầy đủ họ và tên
                         </div>
@@ -63,21 +68,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <!-- Email -->
             <div class="col-md-12 m-2">
-                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                <input type="email" class="form-control" placeholder="thevi@gmail.com" id="email" name="email" required />
+                <label for="email" class="form-label">Email <span
+                        class="text-danger">*</span></label>
+                <input type="email" class="form-control" placeholder="thevi@gmail.com" id="email"
+                    name="email" required />
                 <div class="invalid-feedback">Hãy nhập đúng định dạng email</div>
             </div>
 
             <!-- Phone -->
             <div class="col-md-12 m-2">
-                <label for="phone" class="form-label">Số điện thoại<span class="text-danger">*</span></label>
-                <input type="tel" class="form-control" placeholder="0123456789" id="phone" name="phone" required />
+                <label for="phone" class="form-label">Số điện thoại<span
+                        class="text-danger">*</span></label>
+                <input type="tel" class="form-control" placeholder="0123456789" id="phone"
+                    name="phone" required />
                 <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
             </div>
 
             <div class="col-md-12 m-2">
-                <label for="birth-day" class="form-label">Birthday <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" placeholder="20/10/2000" id="birth-day" name="birth-day" required />
+                <label for="birth-day" class="form-label">Birthday <span
+                        class="text-danger">*</span></label>
+                <input type="date" class="form-control" placeholder="20/10/2000" id="birth-day"
+                    name="birth-day" required />
                 <div id="birthday-feedback" class="invalid-feedback">Vui lòng nhập ngày sinh</div>
             </div>
 
@@ -85,11 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-12 m-2">
                 <span>Giới tính<span class="text-danger">*</span></span>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="radioCheck1" name="gender" value="1" required />
+                    <input type="radio" class="form-check-input" id="radioCheck1" name="gender"
+                        value="1" required />
                     <label class="form-check-label" for="radioCheck1">Nam</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="radioCheck2" name="gender" value="0" required />
+                    <input type="radio" class="form-check-input" id="radioCheck2" name="gender"
+                        value="0" required />
                     <label class="form-check-label" for="radioCheck2">Nữ</label>
                     <div class="invalid-feedback">
                         Vui lòng chọn giới tính sinh học
@@ -99,14 +112,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Password -->
             <div class="col-md-12 m-2">
-                <label for="password" class="form-label">Mật khẩu<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" placeholder="xyz@1234HCM" id="password" name="password" required />
+                <label for="password" class="form-label">Mật khẩu<span
+                        class="text-danger">*</span></label>
+                <input type="password" class="form-control" placeholder="xyz@1234HCM" id="password"
+                    name="password" required />
                 <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
             </div>
 
             <div class="col-md-12 m-2">
-                <label for="confirm-password" class="form-label">Xác nhận mật khẩu<span class="text-danger">*</span></label>
-                <input type="password" class="form-control" placeholder="xyz@1234HCM    " id="confirm-password" name="confirm-password" required />
+                <label for="confirm-password" class="form-label">Xác nhận mật khẩu<span
+                        class="text-danger">*</span></label>
+                <input type="password" class="form-control" placeholder="xyz@1234HCM    "
+                    id="confirm-password" name="confirm-password" required />
                 <div class="invalid-feedback">Vui lòng xác nhận mật khẩu</div>
             </div>
 

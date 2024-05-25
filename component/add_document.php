@@ -1,7 +1,7 @@
 <?php
-include_once("../entities/document.class.php");
-include_once("../entities/doccategory.class.php");
-include_once("../entities/major.class.php");
+include_once ("../entities/document.class.php");
+include_once ("../entities/doccategory.class.php");
+include_once ("../entities/major.class.php");
 
 if (isset($_POST["btnsubmit"])) {
   $title = $_POST["txtName"];
@@ -56,7 +56,10 @@ if (isset($_POST["btncategorysubmit"])) {
   <!-- Boxicons -->
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <!-- My CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous">
   <script src="../assets/js/jquery-slim.min.js"></script>
   <script src="../assets/js/holder.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
@@ -90,6 +93,12 @@ if (isset($_POST["btncategorysubmit"])) {
         <a class="navigate" href="add_document.php">
           <i class='bx bx bxs-calendar-check'></i>
           <span class="text">Thêm tài liệu</span>
+        </a>
+      </li>
+      <li>
+        <a class="navigate" href="add_slide.php">
+          <i class='bx bx bxs-calendar-check'></i>
+          <span class="text">Thêm slide</span>
         </a>
       </li>
     </ul>
@@ -151,7 +160,8 @@ if (isset($_POST["btncategorysubmit"])) {
       </div>
 
       <div class="mt-4">
-        <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post" action="add_document.php" novalidate>
+        <form enctype="multipart/form-data" class="row g-3 needs-validation" method="post"
+          action="add_document.php" novalidate>
           <div class="col-md-6">
             <label for="name" class="form-label">Tiêu đề</label>
             <input type="text" name="txtName" class="form-control" id="name" required>
@@ -161,7 +171,8 @@ if (isset($_POST["btncategorysubmit"])) {
           </div>
           <div class="col-md-6">
             <label for="major" class="form-label">Chuyên ngành</label>
-            <select class="form-select" name="txtMajor" id="major" onchange="checkOther(this);" required>
+            <select class="form-select" name="txtMajor" id="major" onchange="checkOther(this);"
+              required>
               <?php
               $majors = Major::list_major();
               foreach ($majors as $major) {
@@ -175,7 +186,8 @@ if (isset($_POST["btncategorysubmit"])) {
           </div>
           <div class="col-md-6">
             <label for="category" class="form-label">Thể loại</label>
-            <select class="form-select" name="txtCategory" id="category" onchange="checkOther(this);" required>
+            <select class="form-select" name="txtCategory" id="category"
+              onchange="checkOther(this);" required>
               <?php
               $categories = Doccategory::list_doccategory();
               foreach ($categories as $category) {
@@ -196,7 +208,8 @@ if (isset($_POST["btncategorysubmit"])) {
           </div>
           <div class="col-md-12">
             <label for="description" class="form-label">Mô tả</label>
-            <textarea type="text" name="txtDescription" class="form-control" id="description" required> </textarea>
+            <textarea type="text" name="txtDescription" class="form-control" id="description"
+              required> </textarea>
             <div class="invalid-feedback">
               Please describe the document.
             </div>
@@ -205,10 +218,12 @@ if (isset($_POST["btncategorysubmit"])) {
             <div class="d-flex justify-content-between align-items-center">
               <button class="btn btn-primary" name="btnsubmit" type="submit">Thêm tài liệu</button>
               <div class="actions">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#majorModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#majorModal">
                   Thêm chuyên ngành
                 </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#categoryModal">
                   Thêm thể loại
                 </button>
               </div>
@@ -221,7 +236,8 @@ if (isset($_POST["btncategorysubmit"])) {
 
 </body>
 
-<div class="modal fade" id="majorModal" tabindex="-1" aria-labelledby="majorModalLabel" aria-hidden="true">
+<div class="modal fade" id="majorModal" tabindex="-1" aria-labelledby="majorModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -241,13 +257,15 @@ if (isset($_POST["btncategorysubmit"])) {
           </div>
           <div class="col-md-12">
             <label for="major-description" class="form-label">Mô tả</label>
-            <input type="text" name="txtMajorDescription" class="form-control" id="major-description" required>
+            <input type="text" name="txtMajorDescription" class="form-control"
+              id="major-description" required>
             <div class="invalid-feedback">
               Please describe the document.
             </div>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" name="btnmajorsubmit" type="submit">Thêm chuyên ngành</button>
+            <button class="btn btn-primary" name="btnmajorsubmit" type="submit">Thêm chuyên
+              ngành</button>
           </div>
         </form>
       </div>
@@ -255,7 +273,8 @@ if (isset($_POST["btncategorysubmit"])) {
   </div>
 </div>
 
-<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -268,13 +287,15 @@ if (isset($_POST["btncategorysubmit"])) {
         <form class="row g-3 needs-validation" method="post" action="add_document.php">
           <div class="col-md-12">
             <label for="category-name" class="form-label">Tên thể loại</label>
-            <input type="text" name="txtCategoryName" class="form-control" id="category-name" required>
+            <input type="text" name="txtCategoryName" class="form-control" id="category-name"
+              required>
             <div class="invalid-feedback">
               Vui lòng nhập tên thể loại
             </div>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" name="btncategorysubmit" type="submit">Thêm thể loại</button>
+            <button class="btn btn-primary" name="btncategorysubmit" type="submit">Thêm thể
+              loại</button>
           </div>
         </form>
       </div>
@@ -303,6 +324,12 @@ if (isset($_POST["btncategorysubmit"])) {
 </style>
 
 <script src='../js/dashboard.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+  integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+  crossorigin="anonymous"></script>

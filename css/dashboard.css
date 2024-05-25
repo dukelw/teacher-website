@@ -803,3 +803,8 @@ body {
 .readed .article-item {
   color: var(--light) !important;
 }
+
+.readed:hover .article-item,
+.readed:hover {
+  color: var(--dark) !important;
+}

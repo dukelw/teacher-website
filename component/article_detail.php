@@ -84,10 +84,18 @@
           <h3 class="pb-3 font-italic border-bottom">
             Bình luận
           </h3>
-          <form class="comment-container" action="" method="POST">
-            <textarea class="comment-input-box" name="content" placeholder="Nhập bình luận tại đây..." id="comment"></textarea>
-            <input type="button" value="Tạo" class="submitbtn">
-          </form>
+          <?php if (isset($_SESSION["userid"])) {
+            echo "
+              <form class='comment-container' action='' method='POST'>
+                <textarea class='comment-input-box' name='content' placeholder='Nhập bình luận tại đây...' id='comment'></textarea>
+                <input type='button' value='Tạo' class='submitbtn'>
+              </form>
+            ";
+          } else {
+            echo "
+          <p>Vui lòng đăng nhập trước khi bình luận nhé.</p>
+            ";
+          } ?>
           <?php
           function calculateTimeAgo($createdAt)
           {

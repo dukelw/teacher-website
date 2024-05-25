@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="col-md-12 m-2">
                 <button id="submitBtn" class="btn btn-primary" type="submit">
-                    Sign Up
+                    Đăng ký 
                 </button>
             </div>
             <a href="main.php" class="back" style="text-align: center;">Về trang chủ</a>
